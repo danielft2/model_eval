@@ -1,4 +1,4 @@
-![hero](github.png)
+![hero](banner.png)
 
 <p align="center">
 	<h1 align="center"><b>model.eval</b></h1>
