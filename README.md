@@ -23,7 +23,7 @@ Inicialmente, a model.eval foca na avaliação da qualidade das questões educac
 - Envie seu conjunto de teste para avaliar o modelo.  
 - Execute avaliações em modelos configurados e obtenha resultados de métricas automáticas.  
 
-### 📝 Avaliação Humana  
+### Avaliação Humana  
 - Configure avaliações baseadas em feedback humano.  
 - Personalize as avaliações conforme suas necessidades.  
 - Importe as questões geradas pelo modelos para que sejam avaliadas.  
