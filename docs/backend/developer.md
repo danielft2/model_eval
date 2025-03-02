@@ -20,19 +20,19 @@ poetry install
 
 4. Configure as variáveis de ambiente conforme descrito em [docs/backend/env-configuration.md](env-configuration.md).
 
-4. Rode as migrations do banco de dados.
+5. Rode as migrations do banco de dados.
 
 ```bash
 alembic upgrade head
 ```
 
-5. Rode as seeds do banco de dados.
+6. Rode as seeds do banco de dados.
 
 ```bash
 task seed
 ```
 
-6. Inicie o servidor de desenvolvimento com:
+7. Inicie o servidor de desenvolvimento com:
 
 ```bash
 task run
