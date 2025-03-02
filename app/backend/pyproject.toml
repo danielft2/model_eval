@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "model-eval-api"
+version = "0.1.0"
+description = ""
+authors = ["danielft2 <danielalmeida808z@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12.*"
+fastapi = { version = "^0.115.6", extras = ["standard"] }
+sqlalchemy = "^2.0.36"
+pydantic-settings = "^2.7.0"
+alembic = "^1.14.0"
+psycopg = {extras = ["binary"], version = "^3.2.3"}
+pyjwt = "^2.10.1"
+pwdlib = {extras = ["argon2"], version = "^0.2.1"}
+secure-smtplib = "^0.1.1"
+python-multipart = "^0.0.20"
+supabase = "^2.10.0"
+pandas = "^2.2.3"
+transformers = "^4.47.1"
+datasets = "^3.2.0"
+torch = "^2.5.1"
+protobuf = "4.25.5"
+sentencepiece = "^0.2.0"
+torchvision = "^0.20.1"
+torchaudio = "^2.5.1"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.8.4"
+taskipy = "^1.14.1"
+
+[tool.ruff]
+line-length = 79
+extend-exclude = ["alembic"]
+
+[tool.ruff.lint]
+preview = true
+select = ['I', 'F', 'W', 'PL', 'PT']
+
+[tool.taskipy.tasks]
+run = "fastapi dev app/api/main.py"
+lint = "ruff check . && ruff check . --diff"
+format = "ruff check . --fix && ruff format ."
+migrate = "alembic revision --autogenerate -m \"$MESSAGE\""
+upgrade = "alembic upgrade head"
+seed = "python app/initial_data.py"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -3,7 +3,7 @@
 1. Entre no diretório do front-end:
 
 ```bash
-cd backend
+cd app/backend
 ```
 
 2. Ativie o ambiente virtual do python:

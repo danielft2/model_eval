@@ -1,0 +1,6 @@
+export enum eUtilityMetricScale {
+  NOT_USEFUL = 1,
+  USEFUL_WITH_IMPORTANTS_EDITS = 2,
+  USEFUL_WITH_MINOR_EDITS = 3,
+  USEFUL_WITHOUT_EDITS = 4
+}
