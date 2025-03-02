@@ -53,3 +53,4 @@ Inicialmente, a model.eval foca na avaliação da qualidade das questões educac
 ## Docs
 
 - [Desenvolvimento / Front-end ⚙️](docs/frontend/developer.md)
+- [Desenvolvimento / Back-end ⚙️](docs/backend/developer.md)
