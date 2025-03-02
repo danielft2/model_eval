@@ -30,20 +30,22 @@ Inicialmente, a model.eval foca na avaliação da qualidade das questões educac
 - Acompanhe os resultados de forma geral, por questão ou por descritor.  
 - Gere links de compartilhamento para que avaliadores acessem o formulário de avaliação.  
 
-## Get started
+## Arquitetura da Plataforma
 
-We are working on the documentation to get started with Midday for local development: https://docs.midday.ai
-
-## App Architecture
-
-- React
+### Front-end
+- React v19
 - TypeScript
-- Nextjs
-- Supabase
+- Nextjs v15
 - Shadcn
 - TailwindCSS
 
-### Hosting
+### Back-end
+- Python v3.12.*
+- FastAPI
+- Poetry
+- SQLAlchemy
+- Alembic
+- PostgreSQL
 
+### Serviços
 - Supabase (storage)
-- Vercel (Website, edge-config, and metrics)
