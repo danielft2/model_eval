@@ -15,7 +15,7 @@ poetry shell
 3. Instale as dependências:
 
 ```bash
-poetry shell
+poetry install
 ```
 
 4. Configure as variáveis de ambiente conforme descrito em [docs/backend/env-configuration.md](env-configuration.md).
