@@ -3,8 +3,7 @@
 <p align="center">
 	<h1 align="center"><b>model.eval</b></h1>
 <p align="center">
-    Run your business smarter
-    <br />
+    Avalie a seus LLMs de forma rápida
     <br />
     <a href="https://github.com/danielft2/model_eval/issues">Issues</a>
   </p>
@@ -53,3 +52,4 @@ Inicialmente, a model.eval foca na avaliação da qualidade das questões educac
 ## Docs
 
 - [Desenvolvimento / Front-end ⚙️](docs/frontend/developer.md)
+- [Desenvolvimento / Back-end ⚙️](docs/backend/developer.md)
