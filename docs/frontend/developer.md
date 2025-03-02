@@ -16,7 +16,7 @@ cd fronend
 npm i
 ```
 
-3. Configure as variáveis de ambiente conforme descrito em [docs/frontend/env-configuration.md](docs/frontend/env-configuration.md).
+3. Configure as variáveis de ambiente conforme descrito em [docs/frontend/env-configuration.md](env-configuration.md).
 
 4. Inicie o servidor de desenvolvimento com:
 

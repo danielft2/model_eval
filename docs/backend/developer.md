@@ -18,7 +18,7 @@ poetry shell
 poetry shell
 ```
 
-4. Configure as variáveis de ambiente conforme descrito em [docs/backend/env-configuration.md](docs/backend/env-configuration.md).
+4. Configure as variáveis de ambiente conforme descrito em [docs/backend/env-configuration.md](env-configuration.md).
 
 4. Rode as migrations do banco de dados.
 
