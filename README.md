@@ -12,20 +12,23 @@
 
 ## Sobre model.eval
 
-model.eval é uma plataforma desenvolvida como parte do meu Trabalho de Conclusão de Curso (TCC) na Universidade Federal do Ceará. A plataforma oferece um ambiente voltado para pesquisadores que desejam avaliar a performance de seus Grandes Modelos de Linguagem (LLMs) na geração de questões educacionais.
+model.eval é uma plataforma desenvolvida como parte do meu Trabalho de Conclusão de Curso (TCC) na Universidade Federal do Ceará. A plataforma oferece um ambiente voltado para pesquisadores que desejam avaliar a performance de seus Grandes Modelos de Linguagem (LLMs) na geração de questões educacionais utilizando avaliações automáticas e humanas.
 
-Inicialmente, a model.eval foca na avaliação da qualidade das questões educacionais geradas, no contexto de questões atreladas a Base Nacional Comum Curricular (BNCC).
+Inicialmente, a model.eval foca na avaliação da qualidade das questões educacionais geradas por modelos derivados do T5, especificamente contexto de questões atreladas a Base Nacional Comum Curricular (BNCC). 
 
-## Features
+## Funcionalidades
 
-**Time Tracking**: Allows for live time tracking of projects to boost productivity and collaboration, providing insightful project overviews.<br/>
-**Invoicing**: An upcoming feature that will enable users to create web-based invoices, collaborate in real-time, and synchronize projects seamlessly.<br/>
-**Magic Inbox**: Automatically matches incoming invoices or receipts to the correct transactions, simplifying financial tracking and organization.<br/>
-**Vault**: Secure storage for important files like contracts and agreements, keeping everything in one place for easy access​.<br/>
-**Seamless Export**: Facilitates easy export of financial data, packaged neatly in CSV files for accountants.<br/>
-**Assistant**: Provides tailored insights into financial situations, helping users understand spending patterns, cut costs, and find documents.<br/>
+### Avaliação Automática  
+- Configure e gerencie avaliações com métricas automáticas.  
+- Envie seu conjunto de teste para avaliar o modelo.  
+- Execute avaliações em modelos configurados e obtenha resultados de métricas automáticas.  
 
-<br/>
+### 📝 Avaliação Humana  
+- Configure avaliações baseadas em feedback humano.  
+- Personalize as avaliações conforme suas necessidades.  
+- Importe as questões geradas pelo modelos para que sejam avaliadas.  
+- Acompanhe os resultados de forma geral, por questão ou por descritor.  
+- Gere links de compartilhamento para que avaliadores acessem o formulário de avaliação.  
 
 ## Get started
 
