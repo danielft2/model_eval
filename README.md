@@ -33,14 +33,14 @@ Inicialmente, a model.eval foca na avaliação da qualidade das questões educac
 ## Arquitetura da Plataforma
 
 ### Front-end
-- React v19
+- React 
 - TypeScript
-- Nextjs v15
+- Nextjs 
 - Shadcn
 - TailwindCSS
 
 ### Back-end
-- Python v3.12.*
+- Python 
 - FastAPI
 - Poetry
 - SQLAlchemy
