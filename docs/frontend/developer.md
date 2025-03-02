@@ -7,7 +7,7 @@
 1. Entre no diretório do front-end:
 
 ```bash
-cd front-end
+cd fronend
 ```
 
 2. Instale as dependências:
