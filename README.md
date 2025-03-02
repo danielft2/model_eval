@@ -12,9 +12,9 @@
 
 ## Sobre model.eval
 
-model.eval é uma plataforma desenvolvida como parte do meu Trabalho de Conclusão de Curso (TCC) na Universidade Federal do Ceará. A plataforma oferece um ambiente voltado para pesquisadores que desejam avaliar a performance de seus Grandes Modelos de Linguagem (LLMs) na geração de questões educacionais utilizando avaliações automáticas e humanas.
+model.eval é uma plataforma desenvolvida como parte do meu Trabalho de Conclusão de Curso (TCC) na Universidade Federal do Ceará. A plataforma oferece um ambiente voltado para pesquisadores que desejam avaliar a performance de seus Grandes Modelos de Linguagem (LLMs) na geração de questões educacionais de português utilizando avaliações automáticas e humanas.
 
-Inicialmente, a model.eval foca na avaliação da qualidade das questões educacionais geradas por modelos derivados do T5, especificamente contexto de questões atreladas a Base Nacional Comum Curricular (BNCC). 
+Inicialmente, a model.eval foca na avaliação da qualidade das questões educacionais geradas por modelos derivados do T5, especificamente no contexto de questões que visam avaliar alguma habilidade da Base Nacional Comum Curricular (BNCC). 
 
 ## Funcionalidades
 
