@@ -49,3 +49,36 @@ Inicialmente, a model.eval foca na avaliação da qualidade das questões educac
 
 ### Serviços
 - Supabase (storage)
+
+## Prerequisites
+
+- Node.js v18+
+- A running instance of [Saleor](https://github.com/saleor/saleor/)
+
+## Development
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/saleor/saleor-dashboard.git
+```
+
+2. Enter the project directory:
+
+```bash
+cd saleor-dashboard
+```
+
+3. Install the dependencies:
+
+```bash
+npm i
+```
+
+4. Configure the env vars as described in [docs/configuration.md](docs/configuration.md).
+
+5. Start the development server with:
+
+```bash
+npm run dev
+```
