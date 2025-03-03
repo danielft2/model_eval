@@ -3,7 +3,7 @@
 <p align="center">
 	<h1 align="center"><b>model.eval</b></h1>
 <p align="center">
-    Avalie a seus LLMs de forma rápida
+    Avalie seus LLMs de forma rápida
     <br />
     <a href="https://github.com/danielft2/model_eval/issues">Issues</a>
   </p>
