@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { User } from "@/types/user";
+import { User } from "@/core/types/user";
 import { jwtVerify } from "jose";
 
 export async function verifyToken(token: string): Promise<User | null> {
