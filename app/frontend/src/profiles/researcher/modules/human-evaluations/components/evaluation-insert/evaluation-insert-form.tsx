@@ -8,8 +8,8 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 import { cn } from "@/external/lib/utils";
-import { insertHumanEvaluationAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/create-evaluation-action";
-import { retrieveHumanEvaluationDetailsAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/get-evaluation-details-action";
+import { createHumanEvaluationAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/create-evaluation-action";
+import { getEvaluationDetailsAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/get-evaluation-details-action";
 import { humanEvaluationInsertScheme } from "@/human-evaluations/schemes/human-evaluation-insert";
 import { Button } from "@/shared/components/ui/button";
 import { Divider } from "@/shared/components/ui/divider";
@@ -55,7 +55,7 @@ export function HumanEvaluationInsertForm({
 
     try {
       changeLoadingState(true);
-      const response = await insertHumanEvaluationAction(
+      const response = await createHumanEvaluationAction(
         {
           ...data,
           num_questions_of_evaluator: parseInt(data.num_questions_of_evaluator),
@@ -78,7 +78,7 @@ export function HumanEvaluationInsertForm({
     async (evaluationId: string) => {
       try {
         changeLoadingState(true);
-        const response = await retrieveHumanEvaluationDetailsAction(
+        const response = await getEvaluationDetailsAction(
           evaluationId
         );
         if (response.data) {

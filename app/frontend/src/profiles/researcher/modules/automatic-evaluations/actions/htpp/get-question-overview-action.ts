@@ -2,10 +2,10 @@ import { getAccessToken } from "@/shared/actions/utils/auth/get-access-token-act
 import { fetchClient } from "@/external/http/fetch-client";
 import { ResponseApp } from "@/core/http/interfaces/response-app";
 import { verifyResponse } from "@/shared/actions/utils/auth/verify-response-action";
+import { QuestionOverview } from "../../external/http/responses/question-overview";
 
-import { QuestionOverview } from "../../http/responses/question-overview";
 
-export async function getQuestionOverview(questionId: string): Promise<ResponseApp<QuestionOverview, string>> {
+export async function getQuestionOverviewAction(questionId: string): Promise<ResponseApp<QuestionOverview, string>> {
   const token = await getAccessToken();
   const response = await fetchClient.request<QuestionOverview>({
     method: "GET",

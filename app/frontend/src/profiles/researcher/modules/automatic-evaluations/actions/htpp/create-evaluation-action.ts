@@ -3,10 +3,10 @@
 import { getAccessToken } from "@/shared/actions/utils/auth/get-access-token-action";
 import { fetchClient } from "@/external/http/fetch-client";
 import { ResponseApp } from "@/core/http/interfaces/response-app";
-import { AutomaticEvaluationInsertDto } from "@/automatic-evaluations/http/dtos/automatic-evaluation-insert";
 import { revalidateTag } from "next/cache";
+import { AutomaticEvaluationInsertDto } from "../../external/http/dtos/automatic-evaluation-insert";
 
-export async function insertEvaluationAction(
+export async function createEvaluationAction(
   data: AutomaticEvaluationInsertDto,
   evaluationId?: number
 ): Promise<ResponseApp<string, string>> {

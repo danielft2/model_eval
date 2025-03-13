@@ -1,6 +1,6 @@
 import { Divider } from "@/components/ui/divider";
 import { Show } from "@/components/ui/show";
-import { getQuestionOverview } from "@/features/work/automatic-evaluations/actions/get-question-overview";
+import { getQuestionOverviewAction } from "@/features/work/automatic-evaluations/actions/get-question-overview";
 import { PieChartMetric } from "@/features/work/human-evaluations/components/evaluation-details/metrics-results/pie-chart-metric";
 import { OverviewCard } from "@/features/work/human-evaluations/components/evaluation-details/overview-card";
 import { formatRechartData } from "@/external/lib/rechart";
@@ -17,7 +17,7 @@ export default async function QuestionOverviewPage({
   params: Promise<Params>;
 }) {
   const { question_id } = await params;
-  const response = await getQuestionOverview(question_id);
+  const response = await getQuestionOverviewAction(question_id);
 
   if (!response.data) return <h1>Ocorreu um erro.</h1>;
   const { question, metrics_result, number_of_evaluations } = response.data;

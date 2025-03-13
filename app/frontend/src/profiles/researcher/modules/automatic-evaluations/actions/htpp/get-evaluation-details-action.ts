@@ -1,8 +1,8 @@
 "use server";
 
-import { retrieveEvaluationDetails } from "@/profiles/researcher/modules/automatic-evaluations/http/retrieve-evaluation-details";
+import { retrieveEvaluationDetails } from "../../external/http/retrieve-evaluation-details";
 
-export async function retrieveEvaluationDetailsAction(evaluationId: string) {
+export async function getEvaluationDetailsAction(evaluationId: string) {
   const response = await retrieveEvaluationDetails(evaluationId);
   return response;
 }

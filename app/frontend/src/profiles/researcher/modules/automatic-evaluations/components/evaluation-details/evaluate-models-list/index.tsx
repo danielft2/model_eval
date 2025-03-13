@@ -1,4 +1,4 @@
-import { retrieveEvaluationDetails } from "@/profiles/researcher/modules/automatic-evaluations/http/retrieve-evaluation-details";
+import { getEvaluationDetailsAction } from "../../../actions/htpp/get-evaluation-details-action";
 import { EvaluateModelCard } from "./evaluate-model-card";
 
 export type EvaluateModelsListProps = {
@@ -6,7 +6,7 @@ export type EvaluateModelsListProps = {
 }
 
 export async function EvaluateModelsList({ evaluationId }: EvaluateModelsListProps) {
-  const details = await retrieveEvaluationDetails(evaluationId);
+  const details = await getEvaluationDetailsAction(evaluationId);
   const avaliableForEvaluation = !!details.data?.evaluation.filename_test;
 
   return (

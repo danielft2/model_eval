@@ -5,15 +5,15 @@ import { useOptimistic, useTransition } from "react";
 import { toast } from "sonner";
 
 import { changeStatusAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/change-status-action";
-import { createSharedLink } from "@/profiles/researcher/modules/human-evaluations/actions/utils/create-shared-link";
+import { createSharedLinkAction } from "@/profiles/researcher/modules/human-evaluations/actions/utils/create-shared-link-action";
 import { eHumanEvaluationStatus } from "@/human-evaluations/core/enums/evaluation-status";
-import { HumanEvaluationDetails } from "@/human-evaluations/http/responses/human-evaluation-details";
 import { Button } from "@/shared/components/ui/button";
 import { Show } from "@/shared/components/ui/show";
 import { Switch } from "@/shared/components/ui/switch";
 import { useHumanEvaluationDetailsStore } from "@/shared/stores/human-evaluation-details";
 
 import { EvaluationHeaderImportQuestions } from "./evaluation-header-import-questions";
+import { HumanEvaluationDetails } from "../../../externals/http/responses/human-evaluation-details";
 
 type EvaluationHeaderActionsProps = {
   evaluationDetails: HumanEvaluationDetails | null;
@@ -57,7 +57,7 @@ export function EvaluationHeaderActions({
   };
 
   const handleSharedEvaluation = async () => {
-    const link = await createSharedLink(evaluationDetails?.id || "");
+    const link = await createSharedLinkAction(evaluationDetails?.id || "");
     navigator.clipboard.writeText(`${window.location.origin}/form/${link}`);
     toast.success("Link copiado para a área de transferência");
   };

@@ -2,9 +2,9 @@
 
 import { fetchClient } from "@/external/http/fetch-client";
 import { ResponseApp } from "@/core/http/interfaces/response-app";
-import { ValidationErrors } from "@/core/http/interfaces/response";
 import { z } from "zod";
 import { SigninData, SigninError } from "../types/signin";
+import { ValidationErrors } from "@/core/http/contracts/http-client";
 
 const schema = z.object({
   email: z.string().email("Informe um email válido."),

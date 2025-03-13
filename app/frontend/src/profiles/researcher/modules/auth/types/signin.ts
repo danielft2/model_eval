@@ -1,4 +1,4 @@
-import { ValidationErrors } from "@/core/http/interfaces/response";
+import { ValidationErrors } from "@/core/http/contracts/http-client";
 
 export interface SigninData {
   message: string;

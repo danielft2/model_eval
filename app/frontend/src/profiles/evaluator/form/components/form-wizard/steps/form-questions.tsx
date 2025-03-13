@@ -1,4 +1,4 @@
-import { evaluateQuestionsAction } from "@/profiles/evaluator/form/actions/evaluate-questions-action";
+import { evaluateQuestionsAction } from "@/profiles/evaluator/form/actions/http/evaluate-questions-action";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
@@ -7,7 +7,7 @@ import { useWizard, Wizard } from "react-use-wizard";
 import {
   FormQuestionsData,
   FormQuestionsSchema,
-} from "@/profiles/evaluator/form/schemas/form-questions";
+} from "@/profiles/evaluator/form/schemas/form-questions-schema";
 import { useLoadingStore } from "@/shared/stores/loading-store";
 import { ImportedQuestion } from "@/core/types/imported-question";
 

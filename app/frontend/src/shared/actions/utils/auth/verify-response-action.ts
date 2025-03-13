@@ -1,4 +1,4 @@
-import { ResponseHttp } from "@/core/http/interfaces/response";
+import { ResponseHttp } from "@/core/http/contracts/response";
 import { redirect } from "next/navigation";
 
 export async function verifyResponse<T>(response: ResponseHttp<T>) {

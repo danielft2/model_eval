@@ -3,8 +3,8 @@
 import { getAccessToken } from "@/shared/actions/utils/auth/get-access-token-action";
 import { fetchClient } from "@/external/http/fetch-client";
 import { verifyResponse } from "@/shared/actions/utils/auth/verify-response-action";
-import { EvaluateModelResponse } from "../../http/responses/evaluate-model";
 import { ResponseApp } from "@/core/http/interfaces/response-app";
+import { EvaluateModelResponse } from "../../external/http/responses/evaluate-model";
 
 export async function evaluateModelAction(modelId: number): Promise<ResponseApp<EvaluateModelResponse, string>> {
   const token = await getAccessToken();

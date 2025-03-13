@@ -2,7 +2,7 @@
 
 import { retrieveHumanEvaluation } from "@/human-evaluations/service/retrieve-evaluation";
 
-export async function retrieveHumanEvaluationDetailsAction(evaluationId: string) {
+export async function getEvaluationDetailsAction(evaluationId: string) {
   const response = await retrieveHumanEvaluation(evaluationId);
   return response;
 }

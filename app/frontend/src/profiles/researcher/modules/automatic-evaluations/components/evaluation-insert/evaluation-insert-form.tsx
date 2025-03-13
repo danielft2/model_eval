@@ -8,10 +8,10 @@ import { Wizard } from "react-use-wizard";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { insertEvaluationAction } from "@/profiles/researcher/modules/automatic-evaluations/actions/htpp/create-evaluation-action";
+import { createEvaluationAction } from "@/profiles/researcher/modules/automatic-evaluations/actions/htpp/create-evaluation-action";
 import { retrieveEvaluationDetailsAction } from "@/profiles/researcher/modules/automatic-evaluations/actions/htpp/get-evaluation-details-action";
 import { eModelTaskType } from "@/automatic-evaluations/core/enums";
-import { evaluationInsertScheme } from "@/automatic-evaluations/schemes/evalution-insert";
+import { evaluationInsertScheme } from "@/profiles/researcher/modules/automatic-evaluations/schemas/evalution-insert-schema";
 import { useLoadingStore } from "@/shared/stores/loading-store";
 
 import { ChoiceEvaluateMetric } from "./steps/choice-evaluate-metric";
@@ -46,7 +46,7 @@ export function EvaluationInsertForm({ onClose }: FormWrappperProps) {
       changeLoadingState(true)
 
       const evaluationId = editEvaluationId ? parseInt(editEvaluationId) : undefined;
-      const response = await insertEvaluationAction(getValues(), evaluationId);
+      const response = await createEvaluationAction(getValues(), evaluationId);
 
       if (!response.error) {
         toast.success(response.data);

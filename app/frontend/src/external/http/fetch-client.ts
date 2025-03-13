@@ -1,6 +1,5 @@
-import { HttpClient, RequestConfig } from "@/core/http/contracts/http-client";
-import { ResponseHttp } from "@/core/http/interfaces/response";
-import { AppError } from "../../core/http/app-error";
+import { HttpClient, RequestConfig, ResponseHttp } from "@/core/http/contracts/http-client";
+import { AppError } from "@/core/http/errors/app-error";
 
 export class AppFetch implements HttpClient {
   private baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;

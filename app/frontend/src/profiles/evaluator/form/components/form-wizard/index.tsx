@@ -6,7 +6,7 @@ import { Wizard } from "react-use-wizard";
 
 import { getEvaluationFormAction } from "@/profiles/evaluator/form/actions/get-evaluation-form-action";
 import { ErrorScreenForm } from "@/profiles/evaluator/form/components/error-screen-form";
-import { EvaluationFormResponse } from "@/profiles/evaluator/form/http/responses/evaluation-form";
+import { EvaluationFormResponse } from "@/profiles/evaluator/form/external/http/responses/evaluation-form";
 import { LoadingFullScreen } from "@/shared/components/business/loading/loading-full-screen";
 
 import { ConceptsStep } from "./steps/concepts-step";
