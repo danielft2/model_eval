@@ -3,8 +3,8 @@ import { Show } from "@/components/ui/show";
 import { getQuestionOverview } from "@/features/work/automatic-evaluations/actions/get-question-overview";
 import { PieChartMetric } from "@/features/work/human-evaluations/components/evaluation-details/metrics-results/pie-chart-metric";
 import { OverviewCard } from "@/features/work/human-evaluations/components/evaluation-details/overview-card";
-import { formatRechartData } from "@/lib/rechart";
-import { cn } from "@/lib/utils";
+import { formatRechartData } from "@/external/lib/rechart";
+import { cn } from "@/external/lib/utils";
 import { CircleCheck } from "lucide-react";
 
 type Params = {

@@ -1,4 +1,4 @@
-import { Form } from "@/features/auth/components/form";
+import { Form } from "@/profiles/researcher/modules/auth/components/form";
 import Image from "next/image";
 
 export default function SignInPage() {
