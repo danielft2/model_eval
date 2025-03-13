@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react";
 
-import { EvaluationTypeCard } from "@/shared/components/evaluation-type-card";
+import { EvaluationTypeCard } from "@/shared/components/business/evaluation-type-card";
 import { EvaluationInsertModal } from "@/automatic-evaluations/components/evaluation-insert";
 import { HumanEvaluationInsertModal } from "@/human-evaluations/components/evaluation-insert";
 

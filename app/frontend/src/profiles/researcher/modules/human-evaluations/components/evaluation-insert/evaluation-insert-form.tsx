@@ -8,8 +8,8 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 import { cn } from "@/external/lib/utils";
-import { insertHumanEvaluationAction } from "@/human-evaluations/actions/insert-evaluation";
-import { retrieveHumanEvaluationDetailsAction } from "@/human-evaluations/actions/retrieve-evaluation-details";
+import { insertHumanEvaluationAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/create-evaluation-action";
+import { retrieveHumanEvaluationDetailsAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/get-evaluation-details-action";
 import { humanEvaluationInsertScheme } from "@/human-evaluations/schemes/human-evaluation-insert";
 import { Button } from "@/shared/components/ui/button";
 import { Divider } from "@/shared/components/ui/divider";

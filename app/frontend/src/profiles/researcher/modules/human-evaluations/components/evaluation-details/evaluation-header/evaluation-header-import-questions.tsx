@@ -2,9 +2,9 @@ import { ArrowUpFromLine } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { ImportFileModal } from "@/shared/components/import-file";
+import { ImportFileModal } from "@/shared/components/business/import-file";
 import { Button } from "@/shared/components/ui/button";
-import { importQuestionsAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/import-questions";
+import { importQuestionsAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/import-questions-action";
 import { useHumanEvaluationDetailsStore } from "@/shared/stores/human-evaluation-details";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 

@@ -4,8 +4,8 @@ import { useParams } from "next/navigation";
 import { useOptimistic, useTransition } from "react";
 import { toast } from "sonner";
 
-import { changeStatusAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/change-status";
-import { createSharedLink } from "@/human-evaluations/actions/create-shared-link";
+import { changeStatusAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/change-status-action";
+import { createSharedLink } from "@/profiles/researcher/modules/human-evaluations/actions/utils/create-shared-link";
 import { eHumanEvaluationStatus } from "@/human-evaluations/core/enums/evaluation-status";
 import { HumanEvaluationDetails } from "@/human-evaluations/http/responses/human-evaluation-details";
 import { Button } from "@/shared/components/ui/button";

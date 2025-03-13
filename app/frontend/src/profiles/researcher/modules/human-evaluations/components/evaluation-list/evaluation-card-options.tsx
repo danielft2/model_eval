@@ -11,7 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/shared/components/ui/dropdown-menu";
-import { deleteHumanEvaluationAction } from "@/human-evaluations/actions/delete-evaluation";
+import { deleteHumanEvaluationAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/delete-evaluation-action";
 import { useLoadingStore } from "@/shared/stores/loading-store";
 import { HumanEvaluationInsertModal } from "../evaluation-insert";
 
