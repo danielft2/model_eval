@@ -1,5 +1,5 @@
-import { retrieveCurrentUser } from "@/actions/retrieve-current-user";
-import { Navigation } from "@/features/work/components/navigation";
+import { getCurrentUser } from "@/shared/actions/utils/auth/get-current-user-action";
+import { Navigation } from "@/profiles/researcher/shared/components/navigation";
 import Image from "next/image";
 
 export default async function WorkspaceLayout({
@@ -7,7 +7,7 @@ export default async function WorkspaceLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await retrieveCurrentUser();
+  const user = await getCurrentUser();
 
   return (
     <div className="flex flex-col h-screen" style={{ scrollbarGutter: 'stable' }}>

@@ -1,13 +1,13 @@
-import { retrieveCurrentUser } from "@/actions/retrieve-current-user";
-import { Divider } from "@/components/ui/divider";
-import { checkHasEvaluations } from "@/features/work/services/check-has-evaluations";
-import { EvaluationsTabs } from "@/features/work/components/evaluations-tabs";
-import { FirstEvaluation } from "@/features/work/components/first-evaluation";
-import { UpdateUsernameModal } from "@/features/work/components/update-username-modal";
+import { getCurrentUser } from "@/shared/actions/utils/auth/get-current-user-action";
+import { Divider } from "@/shared/components/ui/divider";
+import { checkHasEvaluations } from "@/profiles/researcher/shared/external/http/check-has-evaluations-action";
+import { EvaluationsTabs } from "@/profiles/researcher/shared/components/evaluations-tabs";
+import { FirstEvaluation } from "@/profiles/researcher/shared/components/first-evaluation";
+import { UpdateUsernameModal } from "@/profiles/researcher/shared/components/update-username-modal";
 
 export default async function WorkPage() {
   const hasEvaluations = await checkHasEvaluations();
-  const user = await retrieveCurrentUser();
+  const user = await getCurrentUser();
   const userName = user?.name;
 
   return (
