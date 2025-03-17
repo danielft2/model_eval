@@ -1,27 +1,27 @@
 import { createContext, useState } from "react";
-import { AutomaticEvaluationInsertDto } from "@/automatic-evaluations/http/dtos/automatic-evaluation-insert";
+import { tCreateEvaluationData } from "../schemas/create-evalution-schema";
 
-type EvaluationInsertFormContextData = {
-  evaluationData: AutomaticEvaluationInsertDto;
-  updateEvaluation: (evaluation: Partial<AutomaticEvaluationInsertDto>) => void;
+type CreateEvaluationFormContextData = {
+  evaluationData: tCreateEvaluationData;
+  updateEvaluation: (evaluation: Partial<tCreateEvaluationData>) => void;
 };
 
-type EvaluationInsertFormContextType = {
+type CreateEvaluationFormContextType = {
   children: Readonly<React.ReactNode>;
 };
 
-export const EvaluationInsertFormContext =
-  createContext<EvaluationInsertFormContextData>(
-    {} as EvaluationInsertFormContextData
+export const CreateEvaluationFormContext =
+  createContext<CreateEvaluationFormContextData>(
+    {} as CreateEvaluationFormContextData
   );
 
 export function EvaluationFormProvider({
   children,
-}: EvaluationInsertFormContextType) {
+}: CreateEvaluationFormContextType) {
   const [evaluationData, setEvaluationData] =
-    useState<AutomaticEvaluationInsertDto>({} as AutomaticEvaluationInsertDto);
+    useState<tCreateEvaluationData>({} as tCreateEvaluationData);
 
-  function updateEvaluation(evaluation: Partial<AutomaticEvaluationInsertDto>) {
+  function updateEvaluation(evaluation: Partial<tCreateEvaluationData>) {
     setEvaluationData((prevEvaluation) => ({
       ...prevEvaluation,
       ...evaluation,
@@ -29,8 +29,8 @@ export function EvaluationFormProvider({
   }
 
   return (
-    <EvaluationInsertFormContext value={{ evaluationData, updateEvaluation }}>
+    <CreateEvaluationFormContext value={{ evaluationData, updateEvaluation }}>
       {children}
-    </EvaluationInsertFormContext>
+    </CreateEvaluationFormContext>
   );
 }

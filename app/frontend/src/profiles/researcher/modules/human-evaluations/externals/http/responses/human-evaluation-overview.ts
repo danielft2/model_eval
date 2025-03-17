@@ -1,11 +1,10 @@
+import { tImportedQuestion } from "@/core/types";
 import { HumanEvaluationDetails } from "./human-evaluation-details";
+
+type tQuestions = Pick<tImportedQuestion, 'id' | 'descriptor_code'>;
 
 export type HumanEvaluationOverview = {
   evaluation: HumanEvaluationDetails;
-  imported_questions: ImportedQuestion[];
+  imported_questions: tQuestions[];
 };
 
-export type ImportedQuestion = {
-  id: string;
-  descriptor_code: string;
-}

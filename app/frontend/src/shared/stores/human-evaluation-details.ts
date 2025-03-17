@@ -1,13 +1,13 @@
 import { HumanEvaluationDetails } from "@/features/work/human-evaluations/http/responses/human-evaluation-details";
 import {
   HumanEvaluationOverview,
-  ImportedQuestion,
+  tImportedQuestion,
 } from "@/features/work/human-evaluations/http/responses/human-evaluation-overview";
 import { create } from "zustand";
 
 type HumanEvaluationDetailsStore = {
   evaluation: HumanEvaluationDetails | null;
-  questions: ImportedQuestion[];
+  questions: tImportedQuestion[];
   setDataOverview: (value: Partial<HumanEvaluationOverview>) => void;
 };
 

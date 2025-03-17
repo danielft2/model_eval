@@ -1,10 +1,5 @@
 "use client";
 
-import { importFileTestAction } from "@/profiles/researcher/modules/automatic-evaluations/actions/htpp/import-file-test-action";
-import { Button } from "@/shared/components/ui/button";
-import { Input } from "@/shared/components/ui/input";
-import { Show } from "@/shared/components/ui/show";
-import { ShowConditional } from "@/shared/components/ui/show-conditional";
 import * as Dialog from "@radix-ui/react-dialog";
 import {
   ArrowUpFromLine,
@@ -15,6 +10,13 @@ import {
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+
+import { importFileTestAction } from "@/automatic-evaluations/actions/htpp/import-file-test-action";
+import { Button } from "@/shared/components/ui/button";
+import { Input } from "@/shared/components/ui/input";
+import { Show } from "@/shared/components/ui/show";
+import { ShowConditional } from "@/shared/components/ui/show-conditional";
+import { useAction } from "next-safe-action/hooks";
 import { FileTestFormat } from "./file-test-format";
 
 type ImportFileTestModalProps = {
@@ -26,10 +28,19 @@ export function ImportFileTestModal({
   isOpen,
   setIsOpen,
 }: ImportFileTestModalProps) {
-  const { evaluation_id } = useParams<{ evaluation_id: string }>();
-
   const [file, setFile] = useState<File>();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
+  
+  const { evaluation_id } = useParams<{ evaluation_id: string }>();
+  const { executeAsync } = useAction(importFileTestAction, {
+    onSuccess: ({ data: response }) => {
+      toast.success(response?.message);
+      setIsOpen(false);
+    },
+    onError: ({ error }) => {
+      toast.error(error.serverError);
+    },
+  });
 
   function handleFileUpload(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
@@ -38,27 +49,10 @@ export function ImportFileTestModal({
 
   async function save() {
     if (!file) {
-      console.error("Nenhum arquivo foi selecionado.");
       return;
     }
 
-    try {
-      setIsLoading(true);
-
-      const form = new FormData();
-      form.append("file", file);
-
-      const response = await importFileTestAction(evaluation_id, form);
-
-      if (response.data) {
-        toast.success(response.data);
-        setIsOpen(false);
-      } else {
-        toast.error(response.error);
-      }
-    } finally {
-      setIsLoading(false);
-    }
+    await executeAsync({ evaluationId: Number(evaluation_id), file });
   }
 
   useEffect(() => {

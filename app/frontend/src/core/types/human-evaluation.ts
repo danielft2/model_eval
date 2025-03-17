@@ -1,12 +1,12 @@
-import { HumanEvaluationStatus } from "./human-evaluation-status";
+import { tHumanEvaluationStatus } from "./human-evaluation-status";
 
-export type HumanEvaluation = {
+export type tHumanEvaluation = {
   id: string;
   title: string;
   instructions: string;
   use_relevance: boolean;
   use_answerability: boolean;
   use_utility: boolean;
-  status: HumanEvaluationStatus;
+  status: tHumanEvaluationStatus;
 }
 

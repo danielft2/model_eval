@@ -1,33 +1,18 @@
 "use server";
 
-import { getAccessToken } from "@/shared/actions/utils/auth/get-access-token-action";
-import { fetchClient } from "@/external/http/fetch-client";
-import { ResponseApp } from "@/core/http/interfaces/response-app";
-import { verifyResponse } from "@/shared/actions/utils/auth/verify-response-action";
+import { authActionClient } from "@/external/libs/safe-action";
 import { revalidateTag } from "next/cache";
+import { importFileTestUseCase } from "../../core/usecases/import-file-test-use-case";
+import { importFileTestSchema } from "../../schemas/import-file-test-schema";
 
-export async function importFileTestAction(
-  evaluationId: string,
-  form: FormData
-): Promise<ResponseApp<string, string>> {
-  const token = await getAccessToken();
-  const response = await fetchClient.request<{ file_name_id: string }>({
-    method: "POST",
-    endpoint: `/automatic-evaluation/${evaluationId}/import-file-test`,
-    isMultipart: true,
-    body: form,
-    options: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  });
+export const importFileTestAction = authActionClient
+.schema(importFileTestSchema)
+.action(async ({ parsedInput, ctx: { httpClient, accessToken } }) => {
+  const { evaluationId, file } = parsedInput;
+  const response = await importFileTestUseCase({ evaluationId, file, httpClient, token: accessToken });
 
-  await verifyResponse(response);
-  if (response.data) revalidateTag("evaluation-details");
+  revalidateTag("evaluation-details");
 
-  return {
-    data: response.message || "",
-    error: response.error?.message || "",
-  };
-}
+  return response;
+})
+

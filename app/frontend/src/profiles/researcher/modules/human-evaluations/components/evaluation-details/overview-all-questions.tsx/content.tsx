@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 import { Show } from "@/shared/components/ui/show";
-import { formatRechartData } from "@/external/lib/rechart";
+import { formatRechartData } from "@/external/libs/rechart";
 import { HumanEvaluationAllQuestionsOverview } from "../../../http/responses/human-evaluation-allquestions-overview";
 import { retrieveHumanEvaluationAllQuestionsOverview } from "../../../service/retieve-evaluation-allquestions";
 import { PieChartMetric } from "../metrics-results/pie-chart-metric";

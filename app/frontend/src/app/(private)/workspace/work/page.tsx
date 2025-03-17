@@ -1,12 +1,15 @@
-import { getCurrentUser } from "@/shared/actions/utils/auth/get-current-user-action";
-import { Divider } from "@/shared/components/ui/divider";
-import { checkHasEvaluations } from "@/profiles/researcher/shared/external/http/check-has-evaluations-action";
+import { fetchDataForServerComponent } from "@/external/http/fetch-data-server-components";
 import { EvaluationsTabs } from "@/profiles/researcher/shared/components/evaluations-tabs";
 import { FirstEvaluation } from "@/profiles/researcher/shared/components/first-evaluation";
 import { UpdateUsernameModal } from "@/profiles/researcher/shared/components/update-username-modal";
+import { checkHasEvaluationsUseCase } from "@/profiles/researcher/shared/external/http/check-has-evaluations-action";
+import { getCurrentUser } from "@/shared/actions/utils/auth/get-current-user-action";
+import { Divider } from "@/shared/components/ui/divider";
 
 export default async function WorkPage() {
-  const hasEvaluations = await checkHasEvaluations();
+  const hasEvaluations = await fetchDataForServerComponent({
+    asyncFunction: checkHasEvaluationsUseCase,
+  });
   const user = await getCurrentUser();
   const userName = user?.name;
 
@@ -39,7 +42,7 @@ export default async function WorkPage() {
       ) : (
         <FirstEvaluation />
       )}
-      
+
       <UpdateUsernameModal isOpen={!!userName} />
     </div>
   );

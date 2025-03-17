@@ -1,10 +1,9 @@
 "use server";
 
 import { getAccessToken } from "@/shared/actions/utils/auth/get-access-token-action";
-import { fetchClient } from "@/external/http/fetch-client";
+import { fetchClient } from "@/external/http/client/fetch-client";
 import { ResponseApp } from "@/core/http/interfaces/response-app";
-import { verifyResponse } from "@/shared/actions/utils/auth/verify-response-action";
-import { HumanEvaluationAllQuestionsOverview } from "../http/responses/human-evaluation-allquestions-overview";
+import { HumanEvaluationAllQuestionsOverview } from "../externals/http/responses/human-evaluation-allquestions-overview";
 
 export async function retrieveHumanEvaluationAllQuestionsOverview(
   evaluationId: string,
@@ -27,7 +26,6 @@ export async function retrieveHumanEvaluationAllQuestionsOverview(
       },
     });
 
-  await verifyResponse(response);
 
   return {
     data: response.data || null,

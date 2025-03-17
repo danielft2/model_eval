@@ -1,30 +1,13 @@
 "use server";
 
-import { getAccessToken } from "@/shared/actions/utils/auth/get-access-token-action";
-import { fetchClient } from "@/external/http/fetch-client";
-import { verifyResponse } from "@/shared/actions/utils/auth/verify-response-action";
-import { ResponseApp } from "@/core/http/interfaces/response-app";
-import { EvaluateModelResponse } from "../../external/http/responses/evaluate-model";
+import { authActionClient } from "@/external/libs/safe-action";
+import { evaluateModelUseCase } from "../../core/usecases/evaluate-model-use-case";
+import { evaluateModelSchema } from "../../schemas/evaluate-model-schema";
 
-export async function evaluateModelAction(modelId: number): Promise<ResponseApp<EvaluateModelResponse, string>> {
-  const token = await getAccessToken();
-
-  const response = await fetchClient.request<EvaluateModelResponse>({
-    method: "PUT",
-    endpoint: `/evaluate-model/${modelId}`,
-    options: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  });
-
-  console.log(response)
-
-  await verifyResponse(response);
-
-  return {
-    data: response.data || null,
-    error: response.error?.message || "",
-  }
-}
+export const evaluateModelAction = authActionClient
+  .schema(evaluateModelSchema)
+  .action(async ({ parsedInput, ctx: { httpClient, accessToken } }) => {
+    const { modelId } = parsedInput;
+    const response = await evaluateModelUseCase({ modelId, httpClient, token: accessToken });
+    return response;
+  })

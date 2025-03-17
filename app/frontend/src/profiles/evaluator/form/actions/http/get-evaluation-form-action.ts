@@ -1,6 +1,6 @@
 "use server";
 
-import { fetchClient } from "@/external/http/fetch-client";
+import { fetchClient } from "@/external/http/client/fetch-client";
 import { verifyResponse } from "@/shared/actions/utils/auth/verify-response-action";
 import { ResponseApp } from "@/core/http/interfaces/response-app";
 import { EvaluationFormResponse } from "../../external/http/responses/evaluation-form";

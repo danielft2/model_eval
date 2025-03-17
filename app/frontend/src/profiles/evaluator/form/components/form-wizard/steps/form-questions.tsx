@@ -9,12 +9,12 @@ import {
   FormQuestionsSchema,
 } from "@/profiles/evaluator/form/schemas/form-questions-schema";
 import { useLoadingStore } from "@/shared/stores/loading-store";
-import { ImportedQuestion } from "@/core/types/imported-question";
+import { tImportedQuestion } from "@/core/types/imported-question";
 
 import { FormQuestion } from "./form-question";
 
 type FormQuestionsProps = {
-  questions: ImportedQuestion[];
+  questions: tImportedQuestion[];
   metricsUsed: {
     use_relevance: boolean;
     use_answerability: boolean;

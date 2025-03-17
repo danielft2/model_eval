@@ -1,8 +1,8 @@
-import { MetricsResult } from "@/profiles/researcher/modules/human-evaluations/http/responses/human-evaluation-allquestions-overview";
-import { ImportedQuestion } from "@/core/types/imported-question";
+import { tImportedQuestion } from "@/core/types";
+import { MetricsResult } from "@/human-evaluations/externals/http/responses/human-evaluation-allquestions-overview";
 
 export type QuestionOverview = {
-  question: ImportedQuestion;
+  question: tImportedQuestion;
   metrics_result: MetricsResult;
   number_of_evaluations: number;
 }

@@ -1,8 +1,8 @@
-import { retrieveEvaluations } from "@/profiles/researcher/modules/automatic-evaluations/http/retrieve-evaluations";
+import { getEvaluationsUseCase } from "../../core/usecases/get-evaluations-use-case";
 import { EvaluationCard } from "./evaluation-card";
 
 export async function AutomaticEvaluationList() {
-  const automaticEvaluations = await retrieveEvaluations();
+  const automaticEvaluations = await getEvaluationsUseCase();
   
   return (
     <>

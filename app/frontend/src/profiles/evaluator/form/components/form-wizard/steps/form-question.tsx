@@ -11,12 +11,12 @@ import { MetricAsk } from "@/profiles/evaluator/form/components/metric-ask";
 import { RadioAlternative } from "@/profiles/evaluator/form/components/radio-alternative";
 import { FormQuestionsData } from "@/profiles/evaluator/form/schemas/form-questions-schema";
 import { useLoadingStore } from "@/shared/stores/loading-store";
-import { ImportedQuestion } from "@/core/types/imported-question";
+import { tImportedQuestion } from "@/core/types/imported-question";
 import { eUtilityMetricScale, eBinaryMetricOption } from "@/core/enums";
 
 type FormQuestionsProps = {
   index: number;
-  question: ImportedQuestion;
+  question: tImportedQuestion;
   onFinishEvaluation: VoidFunction;
   metricsUsed: {
     use_relevance: boolean;

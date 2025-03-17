@@ -1,4 +1,4 @@
-export type HumanEvaluationStatus = {
+export type tHumanEvaluationStatus = {
   id: number;
   name: string;
 }

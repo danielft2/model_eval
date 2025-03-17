@@ -1,8 +1,8 @@
 import { getAccessToken } from "@/shared/actions/utils/auth/get-access-token-action";
-import { fetchClient } from "@/external/http/fetch-client";
+import { fetchClient } from "@/external/http/client/fetch-client";
 import { ResponseApp } from "@/core/http/interfaces/response-app";
 import { REVALIDATE_TAGS } from "@/shared/constants/revalidate-tags";
-import { HumanEvaluationResponse } from "../http/responses/human-evaluations";
+import { HumanEvaluationResponse } from "../externals/http/responses/human-evaluations";
 
 export async function retieveHumanEvaluations(): Promise<ResponseApp<HumanEvaluationResponse[], string>> {
   const token = await getAccessToken();

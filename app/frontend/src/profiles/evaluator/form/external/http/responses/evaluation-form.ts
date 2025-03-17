@@ -1,9 +1,9 @@
 import { HumanEvaluation } from "@/core/types/human-evaluation";
-import { ImportedQuestion } from "@/core/types/imported-question";
+import { tImportedQuestion } from "@/core/types/imported-question";
 
 type tHumanEvaluationWithoutId = Omit<HumanEvaluation, "id">;
 
 export type EvaluationFormResponse = {
-  questions: ImportedQuestion[];
+  questions: tImportedQuestion[];
   evaluation: tHumanEvaluationWithoutId;
 }

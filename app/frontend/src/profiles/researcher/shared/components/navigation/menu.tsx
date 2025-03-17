@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from "@/external/lib/utils";
+import { cn } from "@/external/libs/cn";
 import Link, { LinkProps } from "next/link";
 
 type MenuProps = LinkProps & {

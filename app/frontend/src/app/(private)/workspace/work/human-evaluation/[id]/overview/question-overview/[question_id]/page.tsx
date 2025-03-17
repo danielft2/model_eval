@@ -1,11 +1,13 @@
-import { Divider } from "@/components/ui/divider";
-import { Show } from "@/components/ui/show";
-import { getQuestionOverviewAction } from "@/features/work/automatic-evaluations/actions/get-question-overview";
-import { PieChartMetric } from "@/features/work/human-evaluations/components/evaluation-details/metrics-results/pie-chart-metric";
-import { OverviewCard } from "@/features/work/human-evaluations/components/evaluation-details/overview-card";
-import { formatRechartData } from "@/external/lib/rechart";
-import { cn } from "@/external/lib/utils";
 import { CircleCheck } from "lucide-react";
+
+import { getQuestionOverviewUseCase } from "@/automatic-evaluations/core/usecases/get-question-overview-use-case";
+import { fetchDataForServerComponent } from "@/external/http/fetch-data-server-components";
+import { cn } from "@/external/libs/cn";
+import { formatRechartData } from "@/external/libs/rechart";
+import { PieChartMetric } from "@/human-evaluations/components/evaluation-details/metrics-results/pie-chart-metric";
+import { OverviewCard } from "@/human-evaluations/components/evaluation-details/overview-card";
+import { Divider } from "@/shared/components/ui/divider";
+import { Show } from "@/shared/components/ui/show";
 
 type Params = {
   question_id: string;
@@ -17,9 +19,12 @@ export default async function QuestionOverviewPage({
   params: Promise<Params>;
 }) {
   const { question_id } = await params;
-  const response = await getQuestionOverviewAction(question_id);
+  const response = await fetchDataForServerComponent({
+    asyncFunction: getQuestionOverviewUseCase,
+    data: { questionId: Number(question_id) },
+  });
 
-  if (!response.data) return <h1>Ocorreu um erro.</h1>;
+  if (!response?.data) return <h1>Ocorreu um erro.</h1>;
   const { question, metrics_result, number_of_evaluations } = response.data;
   const questionOptions = question.options
     .replace(/^\['|'\]$/g, "")

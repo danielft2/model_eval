@@ -1,8 +1,7 @@
 import { getAccessToken } from "@/shared/actions/utils/auth/get-access-token-action";
-import { fetchClient } from "@/external/http/fetch-client";
+import { fetchClient } from "@/external/http/client/fetch-client";
 import { ResponseApp } from "@/core/http/interfaces/response-app";
-import { HumanEvaluationDetails } from "../http/responses/human-evaluation-details";
-import { verifyResponse } from "@/shared/actions/utils/auth/verify-response-action";
+import { HumanEvaluationDetails } from "../externals/http/responses/human-evaluation-details";
 
 export async function retrieveHumanEvaluation(
   evaluationId: string
@@ -18,7 +17,6 @@ export async function retrieveHumanEvaluation(
     },
   });
 
-  await verifyResponse(response);
 
   return {
     data: response.data || null,

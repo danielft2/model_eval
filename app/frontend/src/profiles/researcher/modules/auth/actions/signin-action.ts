@@ -1,6 +1,6 @@
 "use server";
 
-import { fetchClient } from "@/external/http/fetch-client";
+import { fetchClient } from "@/external/http/client/fetch-client";
 import { ResponseApp } from "@/core/http/interfaces/response-app";
 import { z } from "zod";
 import { SigninData, SigninError } from "../types/signin";

@@ -7,7 +7,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { cn } from "@/external/lib/utils";
+import { cn } from "@/external/libs/cn";
 import { createHumanEvaluationAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/create-evaluation-action";
 import { getEvaluationDetailsAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/get-evaluation-details-action";
 import { humanEvaluationInsertScheme } from "@/human-evaluations/schemes/human-evaluation-insert";
@@ -22,13 +22,13 @@ import { useLoadingStore } from "@/shared/stores/loading-store";
 import { EvaluationMetricsAccordion } from "./evaluation-metrics-accordion";
 
 type HumanEvaluationInsertData = z.infer<typeof humanEvaluationInsertScheme>;
-type HumanEvaluationInsertFormProps = {
+type HumanCreateEvaluationFormProps = {
   onClose: () => void;
 };
 
-export function HumanEvaluationInsertForm({
+export function HumanCreateEvaluationForm({
   onClose,
-}: HumanEvaluationInsertFormProps) {
+}: HumanCreateEvaluationFormProps) {
   const { isLoading, changeLoadingState } = useLoadingStore();
   const searchParams = useSearchParams();
   const editEvaluationId = searchParams.get("edit");

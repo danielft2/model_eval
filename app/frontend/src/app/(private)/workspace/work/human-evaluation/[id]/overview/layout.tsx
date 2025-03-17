@@ -1,5 +1,5 @@
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Sidebar } from "@/features/work/human-evaluations/components/evaluation-details/sidebar";
+import { ScrollArea } from "@/shared/components/ui/scroll-area";
+import { Sidebar } from "@/human-evaluations/components/evaluation-details/sidebar";
 
 export default function HumanEvaluationLayout({
   children,

@@ -1,8 +1,13 @@
 'use client'
+
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
+import { useAction } from "next-safe-action/hooks";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
+import { deleteEvaluationAction } from "@/automatic-evaluations/actions/htpp/delete-evaluation-action";
+import { EvaluationInsertModal } from "@/automatic-evaluations/components/evaluation-insert";
 import { Button } from "@/shared/components/ui/button";
 import {
   DropdownMenu,
@@ -10,9 +15,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/shared/components/ui/dropdown-menu";
-import { deleteEvaluationAction } from "@/profiles/researcher/modules/automatic-evaluations/actions/htpp/delete-evaluation-action";
-import { EvaluationInsertModal } from "@/automatic-evaluations/components/evaluation-insert";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type AutomaticEvaluationCardOptionsProps = {
   evaluationId: number
@@ -20,19 +22,21 @@ type AutomaticEvaluationCardOptionsProps = {
 
 export function EvaluationCardOptions({ evaluationId }: AutomaticEvaluationCardOptionsProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const { executeAsync } = useAction(deleteEvaluationAction, {
+    onSuccess: ({ data }) => {
+      toast.success(data?.message);
+    },
+    onError: ({ error }) => {
+      toast.error(error.serverError);
+    },
+  });
+
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
 
   async function handleDeleteEvaluation() {
-    try {
-      toast.promise(deleteEvaluationAction(evaluationId), {
-        loading: 'Deletando...',
-        success: (response) => {
-          return response.data ?? response.error;   
-        },
-      });
-    } finally {}
+    await executeAsync({ evaluationId });
   }
 
   function handleEditEvaluation() {

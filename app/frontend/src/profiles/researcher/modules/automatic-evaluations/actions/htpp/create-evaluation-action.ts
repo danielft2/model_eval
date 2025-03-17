@@ -1,38 +1,22 @@
 "use server";
 
-import { getAccessToken } from "@/shared/actions/utils/auth/get-access-token-action";
-import { fetchClient } from "@/external/http/fetch-client";
-import { ResponseApp } from "@/core/http/interfaces/response-app";
+import { authActionClient } from "@/external/libs/safe-action";
+import { REVALIDATE_TAGS } from "@/shared/constants/revalidate-tags";
 import { revalidateTag } from "next/cache";
-import { AutomaticEvaluationInsertDto } from "../../external/http/dtos/automatic-evaluation-insert";
+import { z } from "zod";
+import { createEvaluationUseCase } from "../../core/usecases/create-evaluation-use-case";
+import { createEvaluationSchema } from "../../schemas/create-evalution-schema";
 
-export async function createEvaluationAction(
-  data: AutomaticEvaluationInsertDto,
-  evaluationId?: number
-): Promise<ResponseApp<string, string>> {
-  const token = await getAccessToken();
-  const method = evaluationId ? "PUT" : "POST";
-  const endpoint = evaluationId
-    ? `/automatic-evaluation/${evaluationId}`
-    : "/automatic-evaluation";
+const actionSchema = z.object({
+  data: createEvaluationSchema,
+  evaluationId: z.number().optional(),
+})
 
-  const response = await fetchClient.request({
-    method,
-    endpoint,
-    body: { ...data, metric_id: parseInt(data.metric_id) },
-    options: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
+export const createEvaluationAction = authActionClient
+  .schema(actionSchema)
+  .action(async ({ parsedInput, ctx: { accessToken, httpClient } }) => {
+    const { data, evaluationId } = parsedInput;
+    const response = await createEvaluationUseCase({ data, evaluationId, token: accessToken, httpClient });
+    revalidateTag(REVALIDATE_TAGS.AUTOMATIC_EVALUATIONS)
+    return response;
   });
-
-  if (!response.error) {
-    revalidateTag("automatic-evaluations");
-  }
-
-  return {
-    data: response?.message || "",
-    error: response?.error?.message || "",
-  };
-}

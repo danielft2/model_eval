@@ -1,4 +1,4 @@
-import { fetchClient } from "@/external/http/fetch-client";
+import { fetchClient } from "@/external/http/client/fetch-client";
 import { getEvaluatorId } from "../utils/get-evaluator-id-action";
 
 type EvaluateQuestionsActionProps = {
@@ -8,7 +8,7 @@ type EvaluateQuestionsActionProps = {
     considered_answerability: number | null;
     considered_relevance: number | null;
     utility: number | null;
-}[];
+  }[];
 }
 
 export async function evaluateQuestionsAction({ questions, key }: EvaluateQuestionsActionProps) {

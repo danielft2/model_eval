@@ -1,6 +1,5 @@
 import { getAccessToken } from "@/shared/actions/utils/auth/get-access-token-action";
-import { fetchClient } from "@/external/http/fetch-client";
-import { verifyResponse } from "@/shared/actions/utils/auth/verify-response-action";
+import { fetchClient } from "@/external/http/client/fetch-client";
 import { HumanEvaluationDetails } from "../../externals/http/responses/human-evaluation-details";
 
 export async function changeStatusAction(evaluationId: string) {
@@ -14,8 +13,6 @@ export async function changeStatusAction(evaluationId: string) {
       },
     }
   })
-
-  await verifyResponse(response);
 
   return {
     data: response.data || null,

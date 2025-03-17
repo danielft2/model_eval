@@ -1,15 +1,15 @@
 "use client";
-import { useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useMemo } from "react";
 
+import { tImportedQuestion } from "@/core/types";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { ImportedQuestion } from "@/features/work/human-evaluations/http/responses/human-evaluation-overview";
+} from "@/shared/components/ui/select";
 import { useHumanEvaluationDetailsStore } from "@/shared/stores/human-evaluation-details";
 import { Content } from "./content";
 
@@ -23,15 +23,18 @@ export function OverviewAllQuestions() {
     (state) => state.questions
   );
 
-  const questionsOptions = useMemo(() => {
+  const questionsOptions: tImportedQuestion[] = useMemo(() => {
     return questionsDecriptors.reduce((acc, current) => {
       if (
-        !acc.some((item) => item.descriptor_code === current.descriptor_code)
+        !acc.some(
+          (item: tImportedQuestion) =>
+            item.descriptor_code === current.descriptor_code
+        )
       ) {
         acc.push(current);
       }
       return acc;
-    }, [] as ImportedQuestion[]);
+    }, []);
   }, [questionsDecriptors]);
 
   function handleChangedDescriptor(descriptorCode: string) {

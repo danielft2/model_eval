@@ -2,10 +2,9 @@
 
 import { revalidateTag } from "next/cache";
 import { getAccessToken } from "@/shared/actions/utils/auth/get-access-token-action";
-import { fetchClient } from "@/external/http/fetch-client";
+import { fetchClient } from "@/external/http/client/fetch-client";
 import { ResponseApp } from "@/core/http/interfaces/response-app";
 import { REVALIDATE_TAGS } from "@/shared/constants/revalidate-tags";
-import { verifyResponse } from "@/shared/actions/utils/auth/verify-response-action";
 
 export async function deleteHumanEvaluationAction(evaluationId: string): Promise<ResponseApp<string, string>> {
   const token = await getAccessToken();
@@ -20,7 +19,6 @@ export async function deleteHumanEvaluationAction(evaluationId: string): Promise
     },
   });
 
-  await verifyResponse(response);
   if (response.message) revalidateTag(REVALIDATE_TAGS.HUMAN_EVALUATIONS);
 
   return {

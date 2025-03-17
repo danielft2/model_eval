@@ -17,7 +17,7 @@ const modelConfigScheme = z
     }
   );
 
-export const evaluationInsertScheme = z.object({
+export const createEvaluationSchema = z.object({
   title: z.string().nonempty("O título é obrigatório."),
   metric_id: z
     .string()
@@ -27,4 +27,4 @@ export const evaluationInsertScheme = z.object({
   model_qa: modelConfigScheme,
 });
 
-export type EvaluationInsertData = z.infer<typeof evaluationInsertScheme>;
+export type tCreateEvaluationData = z.infer<typeof createEvaluationSchema>;

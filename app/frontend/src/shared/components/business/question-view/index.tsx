@@ -1,9 +1,9 @@
-import { cn } from "@/external/lib/utils";
-import { ImportedQuestion } from "@/core/types/imported-question";
+import { cn } from "@/external/libs/cn";
+import { tImportedQuestion } from "@/core/types/imported-question";
 import { useState } from "react";
 
 type QuestionViewProps = {
-  question: ImportedQuestion;
+  question: tImportedQuestion;
   className?: string;
 };
 

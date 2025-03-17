@@ -1,5 +1,5 @@
-import { Divider } from "@/components/ui/divider";
-import { HumanEvaluationDetailsHeader } from "@/features/work/human-evaluations/components/evaluation-details/evaluation-header";
+import { Divider } from "@/shared/components/ui/divider";
+import { HumanEvaluationDetailsHeader } from "@/human-evaluations/components/evaluation-details/evaluation-header";
 
 export default function HumanEvaluationLayout({
   children,

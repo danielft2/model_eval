@@ -1,9 +1,9 @@
-import { eBinaryMetricOption, eUtilityMetricScale } from "@/core/enums";
+import { BinaryMetric, UtilityMetric } from "@/human-evaluations/types/human-metrics";
 
 export type MetricsResult = {
-  relevance: eBinaryMetricOption;
-  answerability: eBinaryMetricOption;
-  utility: eUtilityMetricScale;
+  relevance: BinaryMetric;
+  answerability: BinaryMetric;
+  utility: UtilityMetric;
 };
 
 export type HumanEvaluationAllQuestionsOverview = {

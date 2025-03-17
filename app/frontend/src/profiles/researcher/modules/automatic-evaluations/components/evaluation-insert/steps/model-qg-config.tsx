@@ -4,7 +4,7 @@ import { useWizard } from "react-use-wizard";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import { Textarea } from "@/shared/components/ui/textarea";
-import { EvaluationInsertData } from "@/profiles/researcher/modules/automatic-evaluations/schemas/evalution-insert-schema";
+import { tCreateEvaluationData } from "@/automatic-evaluations/schemas/create-evalution-schema";
 import { ErrorField } from "@/shared/components/ui/error-field";
 import { DialogSection } from "@/shared/components/business/dialog/dialog-section";
 
@@ -17,7 +17,7 @@ export function ModelQGConfig() {
     trigger,
     getValues,
     formState: { errors },
-  } = useFormContext<EvaluationInsertData>();
+  } = useFormContext<tCreateEvaluationData>();
 
   async function handleNextStep() {
     const isValid = await trigger(["model_qg"]);

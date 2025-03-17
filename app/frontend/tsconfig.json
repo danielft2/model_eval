@@ -22,8 +22,6 @@
       "@/*": ["./src/*"],
       "@/core/*": ["./src/core/*"],
       "@/external/*": ["./src/external/*"],
-      "@/profiles/evaluator/*": ["./src/profiles/evaluator/*"],
-      "@/profiles/researcher/*": ["./src/profiles/researcher/*"],
       "@/automatic-evaluations/*": ["./src/profiles/researcher/modules/automatic-evaluations/*"],
       "@/human-evaluations/*": ["./src/profiles/researcher/modules/human-evaluations/*"],
     }
