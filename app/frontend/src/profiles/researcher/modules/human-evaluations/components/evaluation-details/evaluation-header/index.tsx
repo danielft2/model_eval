@@ -2,14 +2,11 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import {
-  useCallback,
-  useEffect,
-} from "react";
+import { useCallback, useEffect } from "react";
 
+import { getOverviewAction } from "@/human-evaluations/actions/http/get-overview-action";
 import { Badge } from "@/shared/components/ui/badge";
 import { Show } from "@/shared/components/ui/show";
-import { retrieveHumanEvaluationOverview } from "@/human-evaluations/service/retrieve-evaluation-overview";
 import { useHumanEvaluationDetailsStore } from "@/shared/stores/human-evaluation-details";
 
 import { EvaluationHeaderActions } from "./evaluation-header-actions";
@@ -17,14 +14,16 @@ import { EvaluationHeaderActions } from "./evaluation-header-actions";
 export function HumanEvaluationDetailsHeader() {
   const { id } = useParams<{ id: string }>();
 
-  const evaluationDetails = useHumanEvaluationDetailsStore((state) => state.evaluation);
-  const setEvaluationDetails = useHumanEvaluationDetailsStore((state) => state.setDataOverview);
+  const evaluationDetails = useHumanEvaluationDetailsStore(
+    (state) => state.evaluation
+  );
+  const setEvaluationDetails = useHumanEvaluationDetailsStore(
+    (state) => state.setDataOverview
+  );
 
   const retrieveQuestions = useCallback(async () => {
-    try {
-      const response = await retrieveHumanEvaluationOverview(id);
-      if (response.data) setEvaluationDetails(response.data);
-    } finally {}
+    const response = await getOverviewAction({ evaluationId: id });
+    if (response?.data) setEvaluationDetails(response?.data.data);
   }, [id, setEvaluationDetails]);
 
   useEffect(() => {

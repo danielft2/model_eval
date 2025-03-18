@@ -1,7 +1,7 @@
 import { tUseCase } from "@/core/http/contracts/use-case";
 
 type ImportFileTestUseCaseData = tUseCase & {
-  evaluationId: number;
+  evaluationId: string;
   file: File;
 }
 

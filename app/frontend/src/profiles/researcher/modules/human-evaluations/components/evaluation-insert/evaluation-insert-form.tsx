@@ -1,16 +1,19 @@
 "use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
 
 import { cn } from "@/external/libs/cn";
-import { createHumanEvaluationAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/create-evaluation-action";
-import { getEvaluationDetailsAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/get-evaluation-details-action";
-import { humanEvaluationInsertScheme } from "@/human-evaluations/schemes/human-evaluation-insert";
+import { createHumanEvaluationAction } from "@/human-evaluations/actions/http/create-evaluation-action";
+import { getHumanEvaluationAction } from "@/human-evaluations/actions/http/get-evaluation-details-action";
+import {
+  humanEvaluationSchema,
+  tHumanEvaluation,
+} from "@/human-evaluations/schemas/human-evaluation-schema";
 import { Button } from "@/shared/components/ui/button";
 import { Divider } from "@/shared/components/ui/divider";
 import { ErrorField } from "@/shared/components/ui/error-field";
@@ -21,20 +24,17 @@ import { useLoadingStore } from "@/shared/stores/loading-store";
 
 import { EvaluationMetricsAccordion } from "./evaluation-metrics-accordion";
 
-type HumanEvaluationInsertData = z.infer<typeof humanEvaluationInsertScheme>;
-type HumanCreateEvaluationFormProps = {
-  onClose: () => void;
-};
+// type HumanCreateEvaluationFormProps = {
+//   onClose: () => void;
+// };
 
-export function HumanCreateEvaluationForm({
-  onClose,
-}: HumanCreateEvaluationFormProps) {
-  const { isLoading, changeLoadingState } = useLoadingStore();
+export function HumanCreateEvaluationForm() {
+  const { isLoading } = useLoadingStore();
   const searchParams = useSearchParams();
   const editEvaluationId = searchParams.get("edit");
 
-  const humanEvaluationForm = useForm<HumanEvaluationInsertData>({
-    resolver: zodResolver(humanEvaluationInsertScheme),
+  const humanEvaluationForm = useForm<tHumanEvaluation>({
+    resolver: zodResolver(humanEvaluationSchema),
     defaultValues: {
       title: "",
       instructions: "",
@@ -45,7 +45,7 @@ export function HumanCreateEvaluationForm({
     },
   });
 
-  async function handleSubmitData(data: HumanEvaluationInsertData) {
+  async function handleSubmitData(data: tHumanEvaluation) {
     const shouldUseMetrics =
       data.use_relevance || data.use_answerability || data.use_utility;
     if (!shouldUseMetrics) {
@@ -53,47 +53,32 @@ export function HumanCreateEvaluationForm({
       return;
     }
 
-    try {
-      changeLoadingState(true);
-      const response = await createHumanEvaluationAction(
-        {
-          ...data,
-          num_questions_of_evaluator: parseInt(data.num_questions_of_evaluator),
-        },
-        editEvaluationId
-      );
-
-      if (response.data) {
-        toast.success(response.data);
-        onClose();
-      } else if (response.error) {
-        toast.error(response.error);
-      }
-    } finally {
-      changeLoadingState(false);
-    }
+    await createHumanEvaluationAction({
+      data: {
+        ...data,
+        num_questions_of_evaluator: data.num_questions_of_evaluator,
+      },
+      evaluationId: editEvaluationId || "",
+    });
   }
 
   const retrieveDetails = useCallback(
     async (evaluationId: string) => {
-      try {
-        changeLoadingState(true);
-        const response = await getEvaluationDetailsAction(
-          evaluationId
-        );
-        if (response.data) {
-          const data = response.data;
+      const response = await getHumanEvaluationAction({
+        evaluationId,
+      });
 
-          humanEvaluationForm.reset({ 
-            ...response.data,
-            num_questions_of_evaluator: data.num_questions_of_evaluator.toString(),
-          });
-        }
-      } finally {
-        changeLoadingState(false);
+      if (response?.data?.data) {
+        const data = response?.data?.data;
+
+        humanEvaluationForm.reset({
+          ...response.data,
+          num_questions_of_evaluator:
+            data.num_questions_of_evaluator.toString(),
+        });
       }
     },
-    [humanEvaluationForm, changeLoadingState]
+    [humanEvaluationForm]
   );
 
   useEffect(() => {

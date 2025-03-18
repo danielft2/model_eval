@@ -4,7 +4,7 @@ import { authActionClient } from "@/external/libs/safe-action";
 import { REVALIDATE_TAGS } from "@/shared/constants/revalidate-tags";
 import { revalidateTag } from "next/cache";
 import { deleteEvaluationUseCase } from "../../core/usecases/delete-evaluation-use-case";
-import { evaluationIdSchema } from "../../schemas/evaluation-id-schema";
+import { evaluationIdSchema } from "../../../../../../shared/schemas/evaluation-id-schema";
 
 export const deleteEvaluationAction = authActionClient
   .schema(evaluationIdSchema)

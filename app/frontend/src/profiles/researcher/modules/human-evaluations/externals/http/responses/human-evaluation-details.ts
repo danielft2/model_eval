@@ -1,4 +1,4 @@
-import { HumanEvaluationStatus } from "@/core/types/human-evaluation-status";
+import { tHumanEvaluationStatus } from "@/core/types/human-evaluation-status";
 
 export type HumanEvaluationDetails = {
   id: string;
@@ -9,5 +9,5 @@ export type HumanEvaluationDetails = {
   use_relevance: boolean;
   use_answerability: boolean;
   use_utility: boolean;
-  status: HumanEvaluationStatus;
+  status: tHumanEvaluationStatus;
 };

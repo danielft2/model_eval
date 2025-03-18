@@ -3,16 +3,17 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-import { Show } from "@/shared/components/ui/show";
 import { formatRechartData } from "@/external/libs/rechart";
-import { HumanEvaluationAllQuestionsOverview } from "../../../http/responses/human-evaluation-allquestions-overview";
-import { retrieveHumanEvaluationAllQuestionsOverview } from "../../../service/retieve-evaluation-allquestions";
+import { Show } from "@/shared/components/ui/show";
+
+import { getOverviewAllQuestionsAction } from "../../../actions/http/get-overview-all-questions-action";
+import { HumanEvaluationAllQuestionsOverview } from "../../../externals/http/responses/human-evaluation-allquestions-overview";
 import { PieChartMetric } from "../metrics-results/pie-chart-metric";
 import { OverviewCard } from "../overview-card";
 
 type OverviewAllQuestionsProps = {
   decriptorCode: string;
-}
+};
 
 export function Content({ decriptorCode }: OverviewAllQuestionsProps) {
   const [data, setData] = useState<HumanEvaluationAllQuestionsOverview>();
@@ -21,12 +22,12 @@ export function Content({ decriptorCode }: OverviewAllQuestionsProps) {
   useEffect(() => {
     (async () => {
       try {
-        const response = await retrieveHumanEvaluationAllQuestionsOverview(
-          id,
-          decriptorCode
-        );
-        if (!response.data) toast.error(response.error);
-        else setData(response.data);
+        const response = await getOverviewAllQuestionsAction({
+          evaluationId: id,
+          descriptor: decriptorCode,
+        });
+        if (!response?.data) toast.error(response?.serverError);
+        else setData(response.data.data);
       } finally {
       }
     })();

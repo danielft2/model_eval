@@ -1,28 +1,19 @@
 'use server'
 
 import { revalidateTag } from "next/cache";
-import { getAccessToken } from "@/shared/actions/utils/auth/get-access-token-action";
-import { fetchClient } from "@/external/http/client/fetch-client";
-import { ResponseApp } from "@/core/http/interfaces/response-app";
+
+import { authActionClient } from "@/external/libs/safe-action";
 import { REVALIDATE_TAGS } from "@/shared/constants/revalidate-tags";
+import { evaluationIdSchema } from "@/shared/schemas/evaluation-id-schema";
+import { deleteHumanEvaluationUseCase } from "../../core/usecases/delete-evaluation-use-case";
 
-export async function deleteHumanEvaluationAction(evaluationId: string): Promise<ResponseApp<string, string>> {
-  const token = await getAccessToken();
+export const deleteHumanEvaluationAction = authActionClient
+  .schema(evaluationIdSchema)
+  .action(async ({ parsedInput, ctx: { httpClient, accessToken } }) => {
+    const { evaluationId } = parsedInput;
+    const response = await deleteHumanEvaluationUseCase({ evaluationId, httpClient, token: accessToken });
 
-  const response = await fetchClient.request({
-    method: "DELETE",
-    endpoint: `/human-evaluation/${evaluationId}`,
-    options: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  });
+    revalidateTag(REVALIDATE_TAGS.HUMAN_EVALUATIONS)
 
-  if (response.message) revalidateTag(REVALIDATE_TAGS.HUMAN_EVALUATIONS);
-
-  return {
-    data: response?.message || "",
-    error: response?.error?.message || "",
-  }
-}
+    return response;
+  })

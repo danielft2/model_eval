@@ -2,7 +2,7 @@
 
 import { authActionClient } from "@/external/libs/safe-action";
 import { getEvaluationDetailsUseCase } from "../../core/usecases/get-evaluation-details-use-case";
-import { evaluationIdSchema } from "../../schemas/evaluation-id-schema";
+import { evaluationIdSchema } from "../../../../../../shared/schemas/evaluation-id-schema";
 
 export const getEvaluationDetailsAction = authActionClient
   .schema(evaluationIdSchema)

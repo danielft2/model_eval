@@ -3,7 +3,7 @@
 import { authActionClient } from "@/external/libs/safe-action";
 import { revalidateTag } from "next/cache";
 import { importFileTestUseCase } from "../../core/usecases/import-file-test-use-case";
-import { importFileTestSchema } from "../../schemas/import-file-test-schema";
+import { importFileTestSchema } from "../../../../../../shared/schemas/import-file-test-schema";
 
 export const importFileTestAction = authActionClient
 .schema(importFileTestSchema)

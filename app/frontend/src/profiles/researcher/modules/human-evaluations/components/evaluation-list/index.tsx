@@ -1,8 +1,11 @@
-import { retieveHumanEvaluations } from "@/human-evaluations/service/retrieve-evaluations";
+import { fetchDataForServerComponent } from "@/external/http/fetch-data-server-components";
+import { getHumanEvaluationsUseCase } from "@/human-evaluations/core/usecases/get-evaluations-use-case";
 import { HumanEvaluationCard } from "./evaluation-card";
 
 export async function HumanEvaluationsList() {
-  const response = await retieveHumanEvaluations();
+  const response = await fetchDataForServerComponent({
+    asyncFunction: getHumanEvaluationsUseCase
+  });
 
   return (
     <div className="flex flex-wrap gap-4">

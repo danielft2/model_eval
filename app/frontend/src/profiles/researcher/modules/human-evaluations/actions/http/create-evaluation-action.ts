@@ -1,37 +1,20 @@
-"use server";
+"use server"
+
 import { revalidateTag } from "next/cache";
 
-import { getAccessToken } from "@/shared/actions/utils/auth/get-access-token-action";
-import { fetchClient } from "@/external/http/client/fetch-client";
-import { ResponseApp } from "@/core/http/interfaces/response-app";
+import { authActionClient } from "@/external/libs/safe-action";
 import { REVALIDATE_TAGS } from "@/shared/constants/revalidate-tags";
-import { HumanEvaluationInsertDto } from "../../externals/http/dtos/human-evaluation-insert";
+import { createHumanEvaluationUseCase } from "../../core/usecases/create-evaluation-use-case";
+import { createHumanEvaluationSchema } from "../../schemas/create-human-evaluation-schema";
 
-export async function createHumanEvaluationAction(
-  data: HumanEvaluationInsertDto,
-  evaluationId?: string | null 
-): Promise<ResponseApp<string, string>> {
-  const token = await getAccessToken();
-  const method = evaluationId ? "PUT" : "POST";
-  const endpoint = evaluationId
-    ? `/human-evaluation/${evaluationId}`
-    : "/human-evaluation";
+export const createHumanEvaluationAction = authActionClient
+  .schema(createHumanEvaluationSchema)
+  .action(async ({ parsedInput, ctx: { httpClient, accessToken } }) => {
+    const { evaluationId, data } = parsedInput;
+    const response = await createHumanEvaluationUseCase({ evaluationId, data, httpClient, token: accessToken });
+    
+    revalidateTag(REVALIDATE_TAGS.HUMAN_EVALUATIONS)
+    
+    return response;
+  })
 
-  const response = await fetchClient.request({
-    endpoint,
-    method,
-    body: data,
-    options: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  });
-
-  if (response.data) revalidateTag(REVALIDATE_TAGS.HUMAN_EVALUATIONS);
-
-  return {
-    data: response.message || "",
-    error: response.error?.message || "",
-  };
-}
