@@ -7,7 +7,7 @@ import { useCallback, useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { cn } from "@/external/libs/cn";
+import { cn } from "@/shared/libs/cn";
 import { createHumanEvaluationAction } from "@/human-evaluations/actions/http/create-evaluation-action";
 import { getHumanEvaluationAction } from "@/human-evaluations/actions/http/get-evaluation-details-action";
 import {
@@ -24,11 +24,11 @@ import { useLoadingStore } from "@/shared/stores/loading-store";
 
 import { EvaluationMetricsAccordion } from "./evaluation-metrics-accordion";
 
-// type HumanCreateEvaluationFormProps = {
-//   onClose: () => void;
-// };
+type HumanCreateEvaluationFormProps = {
+  onClose: () => void;
+};
 
-export function HumanCreateEvaluationForm() {
+export function HumanCreateEvaluationForm({}: HumanCreateEvaluationFormProps) {
   const { isLoading } = useLoadingStore();
   const searchParams = useSearchParams();
   const editEvaluationId = searchParams.get("edit");

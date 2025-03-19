@@ -1,13 +1,13 @@
 import { CircleCheck } from "lucide-react";
 
 import { getQuestionOverviewUseCase } from "@/automatic-evaluations/core/usecases/get-question-overview-use-case";
-import { fetchDataForServerComponent } from "@/external/http/fetch-data-server-components";
-import { cn } from "@/external/libs/cn";
-import { formatRechartData } from "@/external/libs/rechart";
 import { PieChartMetric } from "@/human-evaluations/components/evaluation-details/metrics-results/pie-chart-metric";
 import { OverviewCard } from "@/human-evaluations/components/evaluation-details/overview-card";
+import { fetchWrapperServerComponent } from "@/infra/http/fetch-wrapper-server-component";
 import { Divider } from "@/shared/components/ui/divider";
 import { Show } from "@/shared/components/ui/show";
+import { cn } from "@/shared/libs/cn";
+import { formatRechartData } from "@/shared/libs/rechart";
 
 type Params = {
   question_id: string;
@@ -19,7 +19,7 @@ export default async function QuestionOverviewPage({
   params: Promise<Params>;
 }) {
   const { question_id } = await params;
-  const response = await fetchDataForServerComponent({
+  const response = await fetchWrapperServerComponent({
     asyncFunction: getQuestionOverviewUseCase,
     data: { questionId: Number(question_id) },
   });

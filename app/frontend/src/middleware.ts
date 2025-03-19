@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { decodeJwt } from 'jose'
-import { verifyToken } from "./profiles/researcher/modules/auth/actions/verify-token";
+import { verifyToken } from "./profiles/researcher/modules/auth/actions/utils/verify-token-action";
 
 const publicRoutes = [
   { path: "/", whenAuthenticated: "redirect" },

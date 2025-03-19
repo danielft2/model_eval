@@ -6,7 +6,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { deleteEvaluationAction } from "@/automatic-evaluations/actions/htpp/delete-evaluation-action";
+import { deleteEvaluationAction } from "@/automatic-evaluations/actions/http/delete-evaluation-action";
 import { EvaluationInsertModal } from "@/automatic-evaluations/components/evaluation-insert";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -17,7 +17,7 @@ import {
 } from "@/shared/components/ui/dropdown-menu";
 
 type AutomaticEvaluationCardOptionsProps = {
-  evaluationId: number
+  evaluationId: string;
 };
 
 export function EvaluationCardOptions({ evaluationId }: AutomaticEvaluationCardOptionsProps) {

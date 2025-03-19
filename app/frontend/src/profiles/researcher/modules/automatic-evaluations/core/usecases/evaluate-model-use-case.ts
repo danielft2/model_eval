@@ -1,19 +1,13 @@
+import { EvaluateModelResponse } from "@/automatic-evaluations/infra/http/responses/evaluate-model";
+import { tEvaluateModelSchema } from "@/automatic-evaluations/schemas/evaluate-model-schema";
 import { tUseCase } from "@/core/http/contracts/use-case";
-import { EvaluateModelResponse } from "../../external/http/responses/evaluate-model";
 
-type EvaluateModelUseCase = tUseCase & {
-  modelId: number;
-}
+type tEvaluateModelUseCasData = tUseCase & tEvaluateModelSchema;
 
-export async function evaluateModelUseCase({ token, httpClient, modelId }: EvaluateModelUseCase) {
+export async function evaluateModelUseCase({ httpClient, modelId }: tEvaluateModelUseCasData) {
   const response = await httpClient.request<EvaluateModelResponse>({
     method: "PUT",
-    endpoint: `/evaluate-model/${modelId}`,
-    options: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
+    endpoint: `/evaluate-model/${modelId}`
   });
 
   return response;

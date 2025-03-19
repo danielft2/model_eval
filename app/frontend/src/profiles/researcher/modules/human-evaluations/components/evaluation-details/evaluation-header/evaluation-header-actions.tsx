@@ -4,16 +4,16 @@ import { useParams } from "next/navigation";
 import { useOptimistic, useTransition } from "react";
 import { toast } from "sonner";
 
-import { changeStatusAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/change-status-action";
-import { createSharedLinkAction } from "@/profiles/researcher/modules/human-evaluations/actions/utils/create-shared-link-action";
+import { changeStatusAction } from "@/human-evaluations/actions/http/change-status-action";
+import { createSharedLinkAction } from "@/human-evaluations/actions/utils/create-shared-link-action";
 import { eHumanEvaluationStatus } from "@/human-evaluations/core/enums/evaluation-status";
+import { HumanEvaluationDetails } from "@/human-evaluations/infra/http/responses/human-evaluation-details";
 import { Button } from "@/shared/components/ui/button";
 import { Show } from "@/shared/components/ui/show";
 import { Switch } from "@/shared/components/ui/switch";
 import { useHumanEvaluationDetailsStore } from "@/shared/stores/human-evaluation-details";
 
 import { EvaluationHeaderImportQuestions } from "./evaluation-header-import-questions";
-import { HumanEvaluationDetails } from "../../../externals/http/responses/human-evaluation-details";
 
 type EvaluationHeaderActionsProps = {
   evaluationDetails: HumanEvaluationDetails | null;
@@ -45,14 +45,7 @@ export function EvaluationHeaderActions({
   const handleChangeStatus = async () => {
     startTransition(async () => {
       setOptimisticAvaliable((state) => !state);
-
-      const response = await changeStatusAction(id);
-      if (response.data) {
-        toast.success("Status alterado com sucesso");
-        setEvaluationDetails({ evaluation: response.data });
-      } else {
-        toast.error(response.error);
-      }
+      await changeStatusAction({ evaluationId: id });
     });
   };
 

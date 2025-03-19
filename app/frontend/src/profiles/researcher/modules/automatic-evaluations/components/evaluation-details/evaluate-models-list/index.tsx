@@ -1,4 +1,4 @@
-import { getEvaluationDetailsAction } from "../../../actions/htpp/get-evaluation-details-action";
+import { getEvaluationDetailsAction } from "../../../actions/http/get-evaluation-details-action";
 import { EvaluateModelCard } from "./evaluate-model-card";
 
 export type EvaluateModelsListProps = {

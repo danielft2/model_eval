@@ -4,7 +4,7 @@ import { useWizard } from "react-use-wizard";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import { Textarea } from "@/shared/components/ui/textarea";
-import { tCreateEvaluationData  } from "@/automatic-evaluations/schemas/create-evalution-schema";
+import { tEvaluationFormSchema  } from "@/profiles/researcher/modules/automatic-evaluations/schemas/evalution-form-schema";
 import { ErrorField } from "@/shared/components/ui/error-field";
 import { DialogSection } from "@/shared/components/business/dialog/dialog-section";
 
@@ -22,7 +22,7 @@ export function ModelDGConfig({ onFinish, isLoading }: ModelDGConfigProps) {
     getValues,
     trigger,
     formState: { errors },
-  } = useFormContext<tCreateEvaluationData>();
+  } = useFormContext<tEvaluationFormSchema>();
 
   async function handleNextStep() {
     const isValid = await trigger(["model_dg"]);

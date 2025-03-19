@@ -1,13 +1,13 @@
 "use server"
 
-import { authActionClient } from "@/external/libs/safe-action";
+import { getHumanEvaluationUseCase } from "@/human-evaluations/core/usecases/get-evaluation-use-case";
+import { authActionClient } from "@/shared/libs/safe-action";
 import { evaluationIdSchema } from "@/shared/schemas/evaluation-id-schema";
-import { getHumanEvaluationUseCase } from "../../core/usecases/get-evaluation-use-case";
 
 export const getHumanEvaluationAction = authActionClient
   .schema(evaluationIdSchema)
-  .action(async ({ parsedInput, ctx: { httpClient, accessToken } }) => {
+  .action(async ({ parsedInput, ctx: { httpClient } }) => {
     const { evaluationId } = parsedInput;
-    const response = getHumanEvaluationUseCase({ evaluationId, httpClient, token: accessToken });
+    const response = getHumanEvaluationUseCase({ evaluationId, httpClient });
     return response;
   })

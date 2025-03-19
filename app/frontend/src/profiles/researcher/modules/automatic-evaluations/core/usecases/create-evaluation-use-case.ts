@@ -1,12 +1,9 @@
+import { tCreateEvaluationSchema } from "@/automatic-evaluations/schemas/create-evaluation-schema";
 import { tUseCase } from "@/core/http/contracts/use-case";
-import { tCreateEvaluationData } from "../../schemas/create-evalution-schema";
 
-type CreateEvaluationUseCaseData = tUseCase & {
-  data: tCreateEvaluationData,
-  evaluationId?: number,
-}
+type tCreateEvaluationUseCaseData = tUseCase & tCreateEvaluationSchema;
 
-export async function createEvaluationUseCase({ data, token, evaluationId, httpClient }: CreateEvaluationUseCaseData) {
+export async function createEvaluationUseCase({ data, evaluationId, httpClient }: tCreateEvaluationUseCaseData) {
   const method = evaluationId ? "PUT" : "POST";
   const endpoint = evaluationId
     ? `/automatic-evaluation/${evaluationId}`
@@ -15,12 +12,7 @@ export async function createEvaluationUseCase({ data, token, evaluationId, httpC
   const response = await httpClient.request({
     method,
     endpoint,
-    body: { ...data, metric_id: parseInt(data.metric_id) },
-    options: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
+    body: { ...data, metric_id: parseInt(data.metric_id) }
   });
 
   return response;

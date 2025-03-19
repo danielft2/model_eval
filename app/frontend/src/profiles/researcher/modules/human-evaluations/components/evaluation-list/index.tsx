@@ -1,9 +1,9 @@
-import { fetchDataForServerComponent } from "@/external/http/fetch-data-server-components";
+import { fetchWrapperServerComponent } from "@/external/http/fetch-data-server-components";
 import { getHumanEvaluationsUseCase } from "@/human-evaluations/core/usecases/get-evaluations-use-case";
 import { HumanEvaluationCard } from "./evaluation-card";
 
 export async function HumanEvaluationsList() {
-  const response = await fetchDataForServerComponent({
+  const response = await fetchWrapperServerComponent({
     asyncFunction: getHumanEvaluationsUseCase
   });
 

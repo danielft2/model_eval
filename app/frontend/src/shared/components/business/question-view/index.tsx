@@ -1,4 +1,4 @@
-import { cn } from "@/external/libs/cn";
+import { cn } from "@/shared/libs/cn";
 import { tImportedQuestion } from "@/core/types/imported-question";
 import { useState } from "react";
 

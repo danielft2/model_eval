@@ -1,19 +1,13 @@
 import { tUseCase } from "@/core/http/contracts/use-case";
-import { HumanEvaluationDetails } from "../../externals/http/responses/human-evaluation-details";
+import { HumanEvaluationDetails } from "@/human-evaluations/infra/http/responses/human-evaluation-details";
+import { tEvaluationIdSchema } from "@/shared/schemas/evaluation-id-schema";
 
-type getHumanEvaluationUseCaseData = tUseCase & {
-  evaluationId: string;
-}
+type tGetHumanEvaluationUseCaseData = tUseCase & tEvaluationIdSchema;
 
-export async function getHumanEvaluationUseCase({ evaluationId, httpClient, token }: getHumanEvaluationUseCaseData) {
+export async function getHumanEvaluationUseCase({ evaluationId, httpClient }: tGetHumanEvaluationUseCaseData) {
   const response = await httpClient.request<HumanEvaluationDetails>({
     method: "GET",
-    endpoint: `/human-evaluation/${evaluationId}`,
-    options: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
+    endpoint: `/human-evaluation/${evaluationId}`
   });
 
   return response;

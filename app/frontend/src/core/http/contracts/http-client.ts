@@ -13,7 +13,7 @@ export type RequestConfig = {
 
 export type ValidationErrors = Record<string, { message: string }>;
 
-export type ResponseHttp<T = unknown> = {
+export type HttpResponse<T = unknown> = {
   message?: string;
   data?: T; 
   error?: {
@@ -25,5 +25,5 @@ export type ResponseHttp<T = unknown> = {
 };
 
 export interface HttpClient {
-  request<T = unknown>(config: RequestConfig): Promise<ResponseHttp<T>> 
+  request<T = unknown>(config: RequestConfig): Promise<HttpResponse<T>> 
 }

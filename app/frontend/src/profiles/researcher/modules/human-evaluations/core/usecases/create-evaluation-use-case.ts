@@ -1,12 +1,9 @@
 import { tUseCase } from "@/core/http/contracts/use-case";
-import { tHumanEvaluation } from "../../schemas/human-evaluation-schema";
+import { tCreateEvaluationSchema } from "@/profiles/researcher/modules/human-evaluations/schemas/create-evaluation-schema";
 
-type createHumanEvaluationUseCaseData = tUseCase & {
-  data: tHumanEvaluation;
-  evaluationId?: string | null;
-}
+type createHumanEvaluationUseCaseData = tUseCase & tCreateEvaluationSchema;
 
-export async function createHumanEvaluationUseCase({ evaluationId, data, httpClient, token }:
+export async function createHumanEvaluationUseCase({ evaluationId, data, httpClient }:
   createHumanEvaluationUseCaseData) {
   const method = evaluationId ? "PUT" : "POST";
   const endpoint = evaluationId
@@ -16,14 +13,8 @@ export async function createHumanEvaluationUseCase({ evaluationId, data, httpCli
   const response = await httpClient.request({
     endpoint,
     method,
-    body: data,
-    options: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
+    body: data
   });
-
 
   return response;
 }

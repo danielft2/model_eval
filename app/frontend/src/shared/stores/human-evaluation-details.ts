@@ -1,8 +1,8 @@
-import { HumanEvaluationDetails } from "@/features/work/human-evaluations/http/responses/human-evaluation-details";
+import { HumanEvaluationDetails } from "@/human-evaluations/http/responses/human-evaluation-details";
 import {
   HumanEvaluationOverview,
   tImportedQuestion,
-} from "@/features/work/human-evaluations/http/responses/human-evaluation-overview";
+} from "@/human-evaluations/http/responses/human-evaluation-overview";
 import { create } from "zustand";
 
 type HumanEvaluationDetailsStore = {

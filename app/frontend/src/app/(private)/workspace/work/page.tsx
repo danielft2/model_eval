@@ -1,4 +1,4 @@
-import { fetchDataForServerComponent } from "@/external/http/fetch-data-server-components";
+import { fetchWrapperServerComponent } from "@/external/http/fetch-data-server-components";
 import { EvaluationsTabs } from "@/profiles/researcher/shared/components/evaluations-tabs";
 import { FirstEvaluation } from "@/profiles/researcher/shared/components/first-evaluation";
 import { UpdateUsernameModal } from "@/profiles/researcher/shared/components/update-username-modal";
@@ -7,7 +7,7 @@ import { getCurrentUser } from "@/shared/actions/utils/auth/get-current-user-act
 import { Divider } from "@/shared/components/ui/divider";
 
 export default async function WorkPage() {
-  const hasEvaluations = await fetchDataForServerComponent({
+  const hasEvaluations = await fetchWrapperServerComponent({
     asyncFunction: checkHasEvaluationsUseCase,
   });
   const user = await getCurrentUser();

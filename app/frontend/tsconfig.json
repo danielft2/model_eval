@@ -20,8 +20,6 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@/core/*": ["./src/core/*"],
-      "@/external/*": ["./src/external/*"],
       "@/automatic-evaluations/*": ["./src/profiles/researcher/modules/automatic-evaluations/*"],
       "@/human-evaluations/*": ["./src/profiles/researcher/modules/human-evaluations/*"],
     }

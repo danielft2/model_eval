@@ -8,13 +8,13 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Wizard } from "react-use-wizard";
 import { toast } from "sonner";
 
-import { createEvaluationAction } from "@/automatic-evaluations/actions/htpp/create-evaluation-action";
-import { getEvaluationDetailsAction } from "@/automatic-evaluations/actions/htpp/get-evaluation-details-action";
+import { createEvaluationAction } from "@/automatic-evaluations/actions/http/create-evaluation-action";
+import { getEvaluationDetailsAction } from "@/automatic-evaluations/actions/http/get-evaluation-details-action";
 import { eModelTaskType } from "@/automatic-evaluations/core/enums";
 import {
-  createEvaluationSchema,
-  tCreateEvaluationData,
-} from "@/automatic-evaluations/schemas/create-evalution-schema";
+  evaluationFormSchema,
+  tEvaluationFormSchema,
+} from "@/automatic-evaluations/schemas/evalution-form-schema";
 import { useLoadingStore } from "@/shared/stores/loading-store";
 
 import { ChoiceEvaluateMetric } from "./steps/choice-evaluate-metric";
@@ -68,9 +68,9 @@ export function CreateEvaluationForm({ onClose }: FormWrappperProps) {
     }
   );
 
-  const createEvaluationForm = useForm<tCreateEvaluationData>({
+  const createEvaluationForm = useForm<tEvaluationFormSchema>({
     mode: "all",
-    resolver: zodResolver(createEvaluationSchema),
+    resolver: zodResolver(evaluationFormSchema),
     defaultValues: {
       metric_id: "",
     },
@@ -79,17 +79,15 @@ export function CreateEvaluationForm({ onClose }: FormWrappperProps) {
   const { getValues } = createEvaluationForm;
 
   async function handleSubmitData() {
-    const evaluationId = editEvaluationId
-      ? parseInt(editEvaluationId)
-      : undefined;
-    await executeAsync({ data: getValues(), evaluationId });
+    await executeAsync({
+      data: getValues(),
+      evaluationId: editEvaluationId || "",
+    });
   }
 
   const retrieveDetails = useCallback(
     async (evaluationId: string) => {
-      await getEvaluationDetailsActionExecute({
-        evaluationId: Number(evaluationId),
-      });
+      await getEvaluationDetailsActionExecute({ evaluationId });
     },
     [getEvaluationDetailsActionExecute]
   );

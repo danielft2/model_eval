@@ -1,5 +1,5 @@
 import { ChildrenProps } from "@/@types/children-props";
-import { cn } from "@/external/libs/cn";
+import { cn } from "@/shared/libs/cn";
 import clsx from "clsx";
 import React from "react";
 

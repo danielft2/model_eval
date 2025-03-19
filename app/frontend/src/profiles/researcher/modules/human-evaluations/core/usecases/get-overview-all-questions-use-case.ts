@@ -1,12 +1,10 @@
 import { tUseCase } from "@/core/http/contracts/use-case";
-import { HumanEvaluationAllQuestionsOverview } from "../../externals/http/responses/human-evaluation-allquestions-overview";
+import { HumanEvaluationAllQuestionsOverview } from "@/human-evaluations/infra/http/responses/human-evaluation-allquestions-overview";
+import { tGetOverviewAllQuestionsSchema } from "@/human-evaluations/schemas/get-overview-all-questions-schema";
 
-type getOverviewAllQuestionsUseCaseData = tUseCase & {
-  evaluationId: string,
-  descriptor: string
-}
+type getOverviewAllQuestionsUseCaseData = tUseCase & tGetOverviewAllQuestionsSchema;
 
-export async function getOverviewAllQuestionsUseCase({ evaluationId, descriptor = "0", httpClient, token }: 
+export async function getOverviewAllQuestionsUseCase({ evaluationId, descriptor = "0", httpClient }:
   getOverviewAllQuestionsUseCaseData) {
   const endpoint =
     descriptor != "0"
@@ -16,14 +14,8 @@ export async function getOverviewAllQuestionsUseCase({ evaluationId, descriptor 
   const response =
     await httpClient.request<HumanEvaluationAllQuestionsOverview>({
       method: "GET",
-      endpoint,
-      options: {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        }
-      },
+      endpoint
     });
-
 
   return response;
 }

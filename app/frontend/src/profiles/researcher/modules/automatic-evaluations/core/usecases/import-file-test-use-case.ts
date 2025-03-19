@@ -1,11 +1,9 @@
 import { tUseCase } from "@/core/http/contracts/use-case";
+import { tImportFileTestSchema } from "@/shared/schemas/import-file-test-schema";
 
-type ImportFileTestUseCaseData = tUseCase & {
-  evaluationId: string;
-  file: File;
-}
+type ImportFileTestUseCaseData = tUseCase & tImportFileTestSchema;
 
-export async function importFileTestUseCase({ token, httpClient, file, evaluationId }: ImportFileTestUseCaseData) {
+export async function importFileTestUseCase({ httpClient, file, evaluationId }: ImportFileTestUseCaseData) {
   const form = new FormData();
   form.append("file", file);
   
@@ -13,12 +11,7 @@ export async function importFileTestUseCase({ token, httpClient, file, evaluatio
     method: "POST",
     endpoint: `/automatic-evaluation/${evaluationId}/import-file-test`,
     isMultipart: true,
-    body: form,
-    options: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
+    body: form
   });
   
   return response;

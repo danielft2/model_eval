@@ -3,11 +3,11 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-import { formatRechartData } from "@/external/libs/rechart";
+import { formatRechartData } from "@/shared/libs/rechart";
 import { Show } from "@/shared/components/ui/show";
 
-import { getOverviewAllQuestionsAction } from "../../../actions/http/get-overview-all-questions-action";
-import { HumanEvaluationAllQuestionsOverview } from "../../../externals/http/responses/human-evaluation-allquestions-overview";
+import { getOverviewAllQuestionsAction } from "@/human-evaluations/actions/http/get-overview-all-questions-action";
+import { HumanEvaluationAllQuestionsOverview } from "@/human-evaluations/infra/http/responses/human-evaluation-allquestions-overview";
 import { PieChartMetric } from "../metrics-results/pie-chart-metric";
 import { OverviewCard } from "../overview-card";
 

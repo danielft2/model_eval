@@ -1,19 +1,13 @@
+import { QuestionOverview } from "@/automatic-evaluations/infra/http/responses/question-overview";
+import { tQuestionIdSchema } from "@/automatic-evaluations/schemas/question-id-schema";
 import { tUseCase } from "@/core/http/contracts/use-case";
-import { QuestionOverview } from "../../external/http/responses/question-overview";
 
-type GetQuestionOverviewUseCaseData = tUseCase & {
-  questionId: number;
-}
+type GetQuestionOverviewUseCaseData = tUseCase & tQuestionIdSchema;
 
-export async function getQuestionOverviewUseCase({ questionId, httpClient, token }: GetQuestionOverviewUseCaseData) {
+export async function getQuestionOverviewUseCase({ questionId, httpClient }: GetQuestionOverviewUseCaseData) {
   const response = await httpClient.request<QuestionOverview>({
     method: "GET",
-    endpoint: `/human-evaluation/overview/question/${questionId}`,
-    options: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
-    },
+    endpoint: `/human-evaluation/overview/question/${questionId}`
   });
 
   return response;

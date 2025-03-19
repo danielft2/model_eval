@@ -11,7 +11,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-import { importFileTestAction } from "@/automatic-evaluations/actions/htpp/import-file-test-action";
+import { importFileTestAction } from "@/profiles/researcher/modules/automatic-evaluations/actions/http/import-file-test-action";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import { Show } from "@/shared/components/ui/show";

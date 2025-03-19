@@ -4,4 +4,4 @@ export const questionIdSchema = z.object({
   questionId: z.number(),
 })
 
-export type tQuestionIdSchemaData = z.infer<typeof questionIdSchema>;
+export type tQuestionIdSchema = z.infer<typeof questionIdSchema>;

@@ -1,36 +1,35 @@
 import { ArrowUpFromLine } from "lucide-react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
+import { importQuestionsAction } from "@/human-evaluations/actions/http/import-questions-action";
 import { ImportFileModal } from "@/shared/components/business/import-file";
 import { Button } from "@/shared/components/ui/button";
-import { importQuestionsAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/import-questions-action";
 import { useHumanEvaluationDetailsStore } from "@/shared/stores/human-evaluation-details";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 type EvaluationHeaderImportQuestionsProps = {
   evaluationId: string;
 };
 
-export function EvaluationHeaderImportQuestions({ evaluationId }: EvaluationHeaderImportQuestionsProps) {
+export function EvaluationHeaderImportQuestions({
+  evaluationId,
+}: EvaluationHeaderImportQuestionsProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const setEvaluationDetails = useHumanEvaluationDetailsStore(state => state.setDataOverview);
+  const setEvaluationDetails = useHumanEvaluationDetailsStore(
+    (state) => state.setDataOverview
+  );
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
   const handleImportQuestions = async (file: File) => {
-    try {
-      const form = new FormData();
-      form.append("file", file);
-
-      const response = await importQuestionsAction(evaluationId, form);
-      if (response.data) { 
-        toast.success("Questões importadas com sucesso!");
-        setEvaluationDetails(response.data);
-        handleUpdateOverviewAllQuestions();
-      } else toast.error(response.error);
-    } finally {}
+    const response = await importQuestionsAction({ evaluationId, file });
+    if (response?.data?.data) {
+      toast.success("Questões importadas com sucesso!");
+      setEvaluationDetails(response?.data?.data);
+      handleUpdateOverviewAllQuestions();
+    }
   };
 
   function handleUpdateOverviewAllQuestions() {

@@ -4,4 +4,4 @@ export const evaluationIdSchema = z.object({
   evaluationId: z.string(),
 })
 
-export type tEvaluationIdSchemaData = z.infer<typeof evaluationIdSchema>;
+export type tEvaluationIdSchema = z.infer<typeof evaluationIdSchema>;

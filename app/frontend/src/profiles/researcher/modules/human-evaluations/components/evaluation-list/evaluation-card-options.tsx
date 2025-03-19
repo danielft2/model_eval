@@ -2,8 +2,8 @@
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { toast } from "sonner";
 
+import { deleteHumanEvaluationAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/delete-evaluation-action";
 import { Button } from "@/shared/components/ui/button";
 import {
   DropdownMenu,
@@ -11,8 +11,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/shared/components/ui/dropdown-menu";
-import { deleteHumanEvaluationAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/delete-evaluation-action";
-import { useLoadingStore } from "@/shared/stores/loading-store";
 import { HumanEvaluationInsertModal } from "../evaluation-insert";
 
 type AutomaticEvaluationCardOptionsProps = {
@@ -20,23 +18,13 @@ type AutomaticEvaluationCardOptionsProps = {
 };
 
 export function HumanEvaluationCardOptions({ evaluationId }: AutomaticEvaluationCardOptionsProps) {
-  const changeLoadingState = useLoadingStore(state => state.changeLoadingState)
-
   const [isOpen, setIsOpen] = useState(false);
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
 
   async function handleDeleteEvaluation() {
-    try {
-      changeLoadingState(true)
-      const response = await deleteHumanEvaluationAction(evaluationId)
-
-      if (response.data) toast.success(response.data);
-      else toast.error(response.error);
-    } finally {
-      changeLoadingState(false)
-    }
+    await deleteHumanEvaluationAction({ evaluationId })
   }
 
   function handleEditEvaluation() {

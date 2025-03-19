@@ -1,5 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Suspense } from "react";
+
 import { DialogSection } from "@/shared/components/business/dialog/dialog-section";
 import { DialogTitle } from "@/shared/components/business/dialog/dialog-title";
 

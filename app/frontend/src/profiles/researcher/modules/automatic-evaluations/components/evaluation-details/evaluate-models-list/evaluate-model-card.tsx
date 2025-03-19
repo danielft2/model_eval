@@ -5,7 +5,7 @@ import { useAction } from "next-safe-action/hooks";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { evaluateModelAction } from "@/automatic-evaluations/actions/htpp/evaluate-model-action";
+import { evaluateModelAction } from "@/profiles/researcher/modules/automatic-evaluations/actions/http/evaluate-model-action";
 import { EvaluatedModel } from "@/automatic-evaluations/types/evaluated-model";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
