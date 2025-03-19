@@ -1,9 +1,9 @@
 import { createContext, useState } from "react";
-import { tCreateEvaluationData } from "../schemas/evalution-form-schema";
+import { tEvaluationFormSchema } from "../schemas/evalution-form-schema";
 
 type CreateEvaluationFormContextData = {
-  evaluationData: tCreateEvaluationData;
-  updateEvaluation: (evaluation: Partial<tCreateEvaluationData>) => void;
+  evaluationData: tEvaluationFormSchema;
+  updateEvaluation: (evaluation: Partial<tEvaluationFormSchema>) => void;
 };
 
 type CreateEvaluationFormContextType = {
@@ -19,9 +19,9 @@ export function EvaluationFormProvider({
   children,
 }: CreateEvaluationFormContextType) {
   const [evaluationData, setEvaluationData] =
-    useState<tCreateEvaluationData>({} as tCreateEvaluationData);
+    useState<tEvaluationFormSchema>({} as tEvaluationFormSchema);
 
-  function updateEvaluation(evaluation: Partial<tCreateEvaluationData>) {
+  function updateEvaluation(evaluation: Partial<tEvaluationFormSchema>) {
     setEvaluationData((prevEvaluation) => ({
       ...prevEvaluation,
       ...evaluation,

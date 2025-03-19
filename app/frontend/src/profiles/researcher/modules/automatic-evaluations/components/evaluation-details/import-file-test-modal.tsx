@@ -7,16 +7,16 @@ import {
   LoaderCircle,
   X,
 } from "lucide-react";
+import { useAction } from "next-safe-action/hooks";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-import { importFileTestAction } from "@/profiles/researcher/modules/automatic-evaluations/actions/http/import-file-test-action";
+import { importFileTestAction } from "@/automatic-evaluations/actions/http/import-file-test-action";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import { Show } from "@/shared/components/ui/show";
 import { ShowConditional } from "@/shared/components/ui/show-conditional";
-import { useAction } from "next-safe-action/hooks";
 import { FileTestFormat } from "./file-test-format";
 
 type ImportFileTestModalProps = {
@@ -30,7 +30,7 @@ export function ImportFileTestModal({
 }: ImportFileTestModalProps) {
   const [file, setFile] = useState<File>();
   const [isLoading] = useState(false);
-  
+
   const { evaluation_id } = useParams<{ evaluation_id: string }>();
   const { executeAsync } = useAction(importFileTestAction, {
     onSuccess: ({ data: response }) => {
@@ -52,7 +52,7 @@ export function ImportFileTestModal({
       return;
     }
 
-    await executeAsync({ evaluationId: Number(evaluation_id), file });
+    await executeAsync({ evaluationId: evaluation_id, file });
   }
 
   useEffect(() => {

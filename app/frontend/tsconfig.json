@@ -20,6 +20,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
+      "@/evaluator/*": ["./src/profiles/evaluator/modules/*"],
       "@/automatic-evaluations/*": ["./src/profiles/researcher/modules/automatic-evaluations/*"],
       "@/human-evaluations/*": ["./src/profiles/researcher/modules/human-evaluations/*"],
     }

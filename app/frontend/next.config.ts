@@ -1,7 +1,20 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  reactStrictMode: false
-};
-
+  async redirects() {
+    return [
+      // {
+      //   source: '/researcher/workspace/work',
+      //   has: [
+      //     {
+      //       type: 'query',
+      //       key: 'token',
+      //     },
+      //   ],
+      //   destination: '/researcher/workspace/work',
+      //   permanent: true,
+      // },
+    ];
+  },
+}
 export default nextConfig;

@@ -1,4 +1,4 @@
-import { fetchWrapperServerComponent } from "@/external/http/fetch-data-server-components";
+import { fetchWrapperServerComponent } from "@/infra/http/fetch-wrapper-server-component";
 import { getHumanEvaluationsUseCase } from "@/human-evaluations/core/usecases/get-evaluations-use-case";
 import { HumanEvaluationCard } from "./evaluation-card";
 

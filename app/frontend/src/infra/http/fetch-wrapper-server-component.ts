@@ -1,15 +1,13 @@
 import { redirect } from "next/navigation";
 
-import { getAccessToken } from "@/shared/actions/utils/auth/get-access-token-action";
-
 import { HttpResponse } from "@/core/http/contracts/http-client";
 import { tUseCase } from "@/core/http/contracts/use-case";
 import { AppError } from "@/core/http/errors/app-error";
+import { getAccessToken } from "@/shared/actions/utils/auth/get-access-token-action";
 import { factoryHttpClient } from "./factory-http-client";
 
 type fetchWrapperServerComponentData<R, T> = {
   asyncFunction: (params: T & tUseCase) => Promise<HttpResponse<R>>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data?: any;
 };
 
@@ -19,7 +17,7 @@ export async function fetchWrapperServerComponent<R = unknown, T = unknown>({ as
   const httpClient = factoryHttpClient(token);
 
   try {
-    const response = await asyncFunction({ ...data, httpClient, token });
+    const response = await asyncFunction({ ...data, httpClient });
     return response;
   } catch (error) {
     if (error instanceof AppError) {
