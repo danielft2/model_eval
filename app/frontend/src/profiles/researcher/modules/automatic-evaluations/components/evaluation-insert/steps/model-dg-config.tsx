@@ -1,12 +1,12 @@
 import { useFormContext } from "react-hook-form";
 import { useWizard } from "react-use-wizard";
 
+import { tEvaluationFormSchema } from "@/automatic-evaluations/schemas/evalution-form-schema";
+import { DialogSection } from "@/shared/components/business/dialog/dialog-section";
 import { Button } from "@/shared/components/ui/button";
+import { ErrorField } from "@/shared/components/ui/error-field";
 import { Input } from "@/shared/components/ui/input";
 import { Textarea } from "@/shared/components/ui/textarea";
-import { EvaluationInsertData } from "@/automatic-evaluations/schemes/evalution-insert";
-import { ErrorField } from "@/shared/components/ui/error-field";
-import { DialogSection } from "@/shared/components/business/dialog/dialog-section";
 
 type ModelDGConfigProps = {
   onFinish: () => void;
@@ -22,7 +22,7 @@ export function ModelDGConfig({ onFinish, isLoading }: ModelDGConfigProps) {
     getValues,
     trigger,
     formState: { errors },
-  } = useFormContext<EvaluationInsertData>();
+  } = useFormContext<tEvaluationFormSchema>();
 
   async function handleNextStep() {
     const isValid = await trigger(["model_dg"]);

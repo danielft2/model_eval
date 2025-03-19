@@ -1,4 +1,4 @@
-export type ImportedQuestion = {
+export type tImportedQuestion = {
   id: string;
   descriptor_code: string;
   title: string;

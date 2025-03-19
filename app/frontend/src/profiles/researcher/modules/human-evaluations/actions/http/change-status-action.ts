@@ -1,24 +1,13 @@
-import { getAccessToken } from "@/shared/actions/utils/auth/get-access-token-action";
-import { fetchClient } from "@/external/http/fetch-client";
-import { verifyResponse } from "@/shared/actions/utils/auth/verify-response-action";
-import { HumanEvaluationDetails } from "../../http/responses/human-evaluation-details";
+"use server"
 
-export async function changeStatusAction(evaluationId: string) {
-  const token = await getAccessToken();
-  const response = await fetchClient.request<HumanEvaluationDetails>({
-    endpoint: `/human-evaluation/${evaluationId}/change-status`,
-    method: "PUT",
-    options: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  })
+import { changeStatusUseCase } from "@/human-evaluations/core/usecases/change-status-use-case";
+import { authActionClient } from "@/shared/libs/safe-action";
+import { evaluationIdSchema } from "@/shared/schemas/evaluation-id-schema";
 
-  await verifyResponse(response);
-
-  return {
-    data: response.data || null,
-    error: response.error?.message || '',
-  }
-}
+export const changeStatusAction = authActionClient
+.schema(evaluationIdSchema)
+.action(async ({ parsedInput, ctx: { httpClient } }) => {
+  const { evaluationId } = parsedInput;
+  const response = await changeStatusUseCase({ evaluationId, httpClient });
+  return response;
+})

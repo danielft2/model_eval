@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 import { eHumanEvaluationStatus } from "@/human-evaluations/core/enums/evaluation-status";
-import { HumanEvaluationResponse } from "@/human-evaluations/http/responses/human-evaluations";
+import { HumanEvaluationResponse } from "@/human-evaluations/infra/http/responses/human-evaluations";
 import { Badge } from "@/shared/components/ui/badge";
 import { Show } from "@/shared/components/ui/show";
 import { ShowConditional } from "@/shared/components/ui/show-conditional";

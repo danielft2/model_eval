@@ -4,10 +4,10 @@ import { useParams } from "next/navigation";
 import { useOptimistic, useTransition } from "react";
 import { toast } from "sonner";
 
-import { changeStatusAction } from "@/profiles/researcher/modules/human-evaluations/actions/http/change-status";
-import { createSharedLink } from "@/human-evaluations/actions/create-shared-link";
+import { changeStatusAction } from "@/human-evaluations/actions/http/change-status-action";
+import { createSharedLinkAction } from "@/human-evaluations/actions/utils/create-shared-link-action";
 import { eHumanEvaluationStatus } from "@/human-evaluations/core/enums/evaluation-status";
-import { HumanEvaluationDetails } from "@/human-evaluations/http/responses/human-evaluation-details";
+import { HumanEvaluationDetails } from "@/human-evaluations/infra/http/responses/human-evaluation-details";
 import { Button } from "@/shared/components/ui/button";
 import { Show } from "@/shared/components/ui/show";
 import { Switch } from "@/shared/components/ui/switch";
@@ -45,19 +45,12 @@ export function EvaluationHeaderActions({
   const handleChangeStatus = async () => {
     startTransition(async () => {
       setOptimisticAvaliable((state) => !state);
-
-      const response = await changeStatusAction(id);
-      if (response.data) {
-        toast.success("Status alterado com sucesso");
-        setEvaluationDetails({ evaluation: response.data });
-      } else {
-        toast.error(response.error);
-      }
+      await changeStatusAction({ evaluationId: id });
     });
   };
 
   const handleSharedEvaluation = async () => {
-    const link = await createSharedLink(evaluationDetails?.id || "");
+    const link = await createSharedLinkAction(evaluationDetails?.id || "");
     navigator.clipboard.writeText(`${window.location.origin}/form/${link}`);
     toast.success("Link copiado para a área de transferência");
   };

@@ -5,7 +5,7 @@ import { Input } from "@/shared/components/ui/input";
 import { LoaderCircle, MailCheck } from "lucide-react";
 import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
-import { signinAction } from "@/profiles/researcher/modules/auth/actions/signin-action";
+import { signinAction } from "@/profiles/researcher/modules/auth/actions/http/signin-action";
 
 const initialState = {
   error: null,

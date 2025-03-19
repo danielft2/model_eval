@@ -3,7 +3,7 @@ import { AgGridReact } from "ag-grid-react";
 import Papa from "papaparse";
 import { useEffect, useState } from "react";
 
-import { fileTestCollumsDataFormat, fileTestRowDataExamples } from "@/core/data/file-questions-format";
+import { fileTestCollumsDataFormat, fileTestRowDataExamples } from "@/core/mocks/file-questions-format";
 import { RowData } from "@/automatic-evaluations/types/file-test-row-data";
 
 ModuleRegistry.registerModules([AllCommunityModule]);

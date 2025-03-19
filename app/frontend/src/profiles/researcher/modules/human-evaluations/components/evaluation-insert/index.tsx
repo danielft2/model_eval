@@ -1,9 +1,10 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Suspense } from "react";
+
 import { DialogSection } from "@/shared/components/business/dialog/dialog-section";
 import { DialogTitle } from "@/shared/components/business/dialog/dialog-title";
 
-import { HumanEvaluationInsertForm } from "./evaluation-insert-form";
+import { HumanCreateEvaluationForm } from "./evaluation-insert-form";
 
 type EvaluationModalProps = {
   isOpen: boolean;
@@ -34,7 +35,7 @@ export function HumanEvaluationInsertModal({
             </DialogSection.Description>
           </DialogSection.Content>
           <Suspense>
-            <HumanEvaluationInsertForm onClose={() => setIsOpen(false)} />
+            <HumanCreateEvaluationForm onClose={() => setIsOpen(false)} />
           </Suspense>
         </Dialog.Content>
       </Dialog.Portal>

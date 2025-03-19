@@ -1,13 +1,12 @@
 "use client";
 
-import { fileTestCollumsDataExample, fileTestRowDataExample } from "@/core/data/file-questions-format";
-import { RowData } from "@/automatic-evaluations/types/file-test-row-data";
-
 import { AllCommunityModule, ColDef, ModuleRegistry } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 import Papa from "papaparse";
-
 import { useEffect, useState } from "react";
+
+import { RowData } from "@/automatic-evaluations/types/file-test-row-data";
+import { fileTestCollumsDataFormat, fileTestRowDataExamples } from "@/core/mocks/file-questions-format";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -16,8 +15,8 @@ type FileTestFormatProps = {
 }
 
 export function FileTestFormat({ file }: FileTestFormatProps) {
-  const [rowData, setRowData] = useState<RowData[]>(fileTestRowDataExample);
-  const [colDefs, setColumnDefs] = useState<ColDef<RowData>[]>(fileTestCollumsDataExample);
+  const [rowData, setRowData] = useState<RowData[]>(fileTestRowDataExamples);
+  const [colDefs, setColumnDefs] = useState<ColDef<RowData>[]>(fileTestCollumsDataFormat as ColDef<RowData>[]);
 
   useEffect(() => {
     handleFileUpload(file)

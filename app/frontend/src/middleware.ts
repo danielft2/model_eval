@@ -1,46 +1,51 @@
+import type { NextURL } from 'next/dist/server/web/next-url';
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { decodeJwt } from 'jose'
-import { verifyToken } from "./profiles/researcher/modules/auth/actions/verify-token";
+
+import { decodeJwt } from 'jose';
+import { verifyToken } from "./profiles/researcher/modules/auth/actions/utils/verify-token-action";
 
 const publicRoutes = [
-  { path: "/", whenAuthenticated: "redirect" },
+  { path: "/researcher", whenAuthenticated: "redirect" },
   { path: "/form/[key]", whenAuthenticated: "next" },
 ] as const;
 
-const REDIRECT_WHEN_NOT_AUTHENTICATED = "/";
+const REDIRECT_WHEN_NOT_AUTHENTICATED = "/researcher";
 
 export async function middleware(request: NextRequest) {
   const pathName = request.nextUrl.pathname;
   const publicRoute = publicRoutes.find((route) => route.path === pathName);
   const authToken = request.cookies.get("token")?.value;
 
+  if (pathName === "/") {
+    return redirectWhenNotAuthenticated(request.nextUrl.clone());
+  }
+
   if (!authToken && publicRoute) {
     return NextResponse.next();
   }
 
-  if (!authToken && pathName.startsWith("/workspace")) {
+  if (!authToken && pathName.includes("/workspace")) {
     const searchParams = new URLSearchParams(request.nextUrl.search);
     const token = searchParams.get("token") ?? "";
 
     const userPayload = await verifyToken(token);
 
     if (userPayload?.id) {
-      const response = NextResponse.next();
+      const newUrl = new URL(request.nextUrl.toString());
+      newUrl.searchParams.delete("token");
+      const response = NextResponse.redirect(newUrl);
+
       response.cookies.set("token", token, { httpOnly: true });
       response.cookies.set("user", JSON.stringify(userPayload), { httpOnly: true });
       return response;
     } 
-
-    const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED;
-    return NextResponse.redirect(redirectUrl);
+    
+    return redirectWhenNotAuthenticated(request.nextUrl.clone());
   }
 
   if (!authToken && !publicRoute) {
-    const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED;
-    return NextResponse.redirect(redirectUrl);
+    return redirectWhenNotAuthenticated(request.nextUrl.clone());
   }
 
   if (authToken && !publicRoute) {
@@ -69,6 +74,11 @@ export async function middleware(request: NextRequest) {
   }
 
   return NextResponse.next();
+}
+
+function redirectWhenNotAuthenticated(redirectUrl: NextURL) {
+  redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED;
+  return NextResponse.redirect(redirectUrl);
 }
 
 export const config = {

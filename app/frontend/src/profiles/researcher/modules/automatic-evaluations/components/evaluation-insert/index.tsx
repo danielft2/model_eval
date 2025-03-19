@@ -2,7 +2,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Suspense } from "react";
 
 import { DialogTitle } from "@/shared/components/business/dialog/dialog-title";
-import { EvaluationInsertForm } from "./evaluation-insert-form";
+import { CreateEvaluationForm } from "./create-evaluation-form";
 
 type EvaluationModalProps = {
   isOpen: boolean;
@@ -28,7 +28,7 @@ export function EvaluationInsertModal({
         >
           <DialogTitle>Avaliação Automática</DialogTitle>
           <Suspense>
-            <EvaluationInsertForm onClose={() => setIsOpen(false)} />
+            <CreateEvaluationForm onClose={() => setIsOpen(false)} />
           </Suspense>
         </Dialog.Content>
       </Dialog.Portal>

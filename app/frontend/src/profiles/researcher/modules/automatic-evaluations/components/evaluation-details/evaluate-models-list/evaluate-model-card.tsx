@@ -1,10 +1,11 @@
 "use client";
 
 import { CircleCheck, LoaderCircle } from "lucide-react";
+import { useAction } from "next-safe-action/hooks";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { evaluateModelAction } from "@/profiles/researcher/modules/automatic-evaluations/actions/htpp/evaluate-model-action";
+import { evaluateModelAction } from "@/profiles/researcher/modules/automatic-evaluations/actions/http/evaluate-model-action";
 import { EvaluatedModel } from "@/automatic-evaluations/types/evaluated-model";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
@@ -19,20 +20,18 @@ export function EvaluateModelCard({
   model,
   isAvaliableForEvaluation,
 }: EvaluateModelCardProps) {
-  const [isEvaluating, setIsEvaluating] = useState(false);
+  const [isEvaluating] = useState(false);
   const [metricResult, setMetricResult] = useState(model.metric_result);
+  const { executeAsync } = useAction(evaluateModelAction, {
+    onSuccess: ({ data: response }) => {
+      const { data } = response || {};
+      setMetricResult(data?.perplexity || 0);
+      toast.success("Modelo avaliado com sucesso!");
+    },
+  })
 
   async function handleEvaluateMode() {
-    try {
-      setIsEvaluating(true);
-      const response = await evaluateModelAction(model.id);
-      if (response.data) {
-        setMetricResult(response.data.perplexity);
-        toast.success("Modelo avaliado com sucesso!");
-      };
-    } finally {
-      setIsEvaluating(false);
-    }
+    await executeAsync({ modelId: model.id })
   }
 
   return (

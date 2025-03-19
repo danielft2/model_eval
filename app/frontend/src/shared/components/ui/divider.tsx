@@ -1,4 +1,4 @@
-import { cn } from "@/external/lib/utils";
+import { cn } from "@/shared/libs/cn";
 
 export function Divider({ className }: { className?: string }) {
   return (

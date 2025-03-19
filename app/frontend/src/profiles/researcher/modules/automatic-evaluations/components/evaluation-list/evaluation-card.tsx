@@ -5,11 +5,11 @@ import {
   TableProperties,
 } from "lucide-react";
 import Link from "next/link";
+import { Suspense } from "react";
 
-import { AutomaticEvaluationResponse } from "@/automatic-evaluations/http/responses/automatic-evaluation-response";
+import { AutomaticEvaluationResponse } from "@/automatic-evaluations/infra/http/responses/automatic-evaluation-response";
 import { Show } from "@/shared/components/ui/show";
 import { ShowConditional } from "@/shared/components/ui/show-conditional";
-import { Suspense } from "react";
 import { EvaluationCardOptions } from "./automatic-evaluation-card-options";
 
 type AutomaticEvaluationCardProps = {
@@ -69,7 +69,7 @@ export function EvaluationCard({ data }: AutomaticEvaluationCardProps) {
       </Link>
 
       <Suspense>
-        <EvaluationCardOptions evaluationId={data.id} />
+        <EvaluationCardOptions evaluationId={data.id.toString()} />
       </Suspense>
     </div>
   );

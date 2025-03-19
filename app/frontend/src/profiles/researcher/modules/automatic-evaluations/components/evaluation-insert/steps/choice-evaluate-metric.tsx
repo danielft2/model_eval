@@ -6,7 +6,7 @@ import { Info } from "lucide-react";
 import { Controller, useFormContext } from "react-hook-form";
 import { useWizard } from "react-use-wizard";
 
-import { EvaluationInsertData } from "@/automatic-evaluations/components/evaluation-insert/evaluation-insert-form";
+import { tEvaluationFormSchema } from "@/automatic-evaluations/schemas/evalution-form-schema";
 import { DialogSection } from "@/shared/components/business/dialog/dialog-section";
 import { Button } from "@/shared/components/ui/button";
 import { Divider } from "@/shared/components/ui/divider";
@@ -21,7 +21,7 @@ import {
 } from "@/shared/components/ui/select";
 
 type ChoiceEvaluateMetricData = Pick<
-  EvaluationInsertData,
+  tEvaluationFormSchema,
   "metric_id" | "title"
 >;
 

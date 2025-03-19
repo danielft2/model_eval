@@ -1,8 +1,13 @@
-"use server";
+"use server"
 
-import { retrieveHumanEvaluation } from "@/human-evaluations/service/retrieve-evaluation";
+import { getHumanEvaluationUseCase } from "@/human-evaluations/core/usecases/get-evaluation-use-case";
+import { authActionClient } from "@/shared/libs/safe-action";
+import { evaluationIdSchema } from "@/shared/schemas/evaluation-id-schema";
 
-export async function retrieveHumanEvaluationDetailsAction(evaluationId: string) {
-  const response = await retrieveHumanEvaluation(evaluationId);
-  return response;
-}
+export const getHumanEvaluationAction = authActionClient
+  .schema(evaluationIdSchema)
+  .action(async ({ parsedInput, ctx: { httpClient } }) => {
+    const { evaluationId } = parsedInput;
+    const response = getHumanEvaluationUseCase({ evaluationId, httpClient });
+    return response;
+  })
