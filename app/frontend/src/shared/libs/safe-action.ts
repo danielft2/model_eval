@@ -8,6 +8,7 @@ import { factoryHttpClient } from "@/infra/http/factory-http-client";
 export const actionClient = createSafeActionClient({
   handleServerError: (error) => {
     if (error instanceof AppError) {
+      console.log(error)
       if (error.statusCode === 401) {
         redirect("/?token=expired");
       }
@@ -27,5 +28,5 @@ export const authActionClient = actionClient
       throw new AppError(401, "Não autorizado");
     }
 
-    return next({ ctx: { httpClient: factoryHttpClient() } })
+    return next({ ctx: { httpClient: factoryHttpClient(accessToken) } })
   })

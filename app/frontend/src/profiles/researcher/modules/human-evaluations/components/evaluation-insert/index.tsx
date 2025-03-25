@@ -1,8 +1,8 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Suspense } from "react";
 
-import { DialogSection } from "@/shared/components/business/dialog/dialog-section";
-import { DialogTitle } from "@/shared/components/business/dialog/dialog-title";
+import { DialogSection } from "@/profiles/researcher/shared/components/dialog/dialog-section";
+import { DialogTitle } from "@/profiles/researcher/shared/components/dialog/dialog-title";
 
 import { HumanCreateEvaluationForm } from "./evaluation-insert-form";
 
