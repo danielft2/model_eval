@@ -13,7 +13,7 @@ const modelConfigScheme = z
     {
       message:
         "Ambos os campos devem ser preenchidos ou ambos devem estar vazios.",
-      path: ["model_title_id"],
+      path: ["input_text"],
     }
   );
 
