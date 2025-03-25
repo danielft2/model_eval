@@ -4,7 +4,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import { importQuestionsAction } from "@/human-evaluations/actions/http/import-questions-action";
-import { ImportFileModal } from "@/shared/components/business/import-file";
+import { ImportFileModal } from "@/profiles/researcher/shared/components/import-file-modal";
 import { Button } from "@/shared/components/ui/button";
 import { useHumanEvaluationDetailsStore } from "@/shared/stores/human-evaluation-details";
 
@@ -50,9 +50,10 @@ export function EvaluationHeaderImportQuestions({
       </Button>
 
       <ImportFileModal
-        isOpen={isModalOpen}
         title="Avaliação Humana - Questões"
         legend="Importe as questões para avaliação"
+        isOpen={isModalOpen}
+        isLoading={false}
         setIsOpen={setIsModalOpen}
         onImportFile={handleImportQuestions}
       />

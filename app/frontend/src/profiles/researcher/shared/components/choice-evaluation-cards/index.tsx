@@ -1,9 +1,9 @@
 'use client'
 import { useState } from "react";
 
-import { EvaluationTypeCard } from "@/shared/components/business/evaluation-type-card";
-import { EvaluationInsertModal } from "@/automatic-evaluations/components/evaluation-insert";
+import { EvaluationTypeCard } from "@/profiles/researcher/shared/components/evaluation-type-card";
 import { HumanEvaluationInsertModal } from "@/human-evaluations/components/evaluation-insert";
+import { EvaluationFormModal } from "@/profiles/researcher/modules/automatic-evaluations/components/form";
 
 export function ChoiceEvaluationCards() {
   const [automaticEvaluationIsOpen, setAutomaticEvaluationIsOpen] = useState(false);
@@ -54,7 +54,7 @@ export function ChoiceEvaluationCards() {
         </EvaluationTypeCard.Root>
       </div>
     
-      <EvaluationInsertModal
+      <EvaluationFormModal
         isOpen={automaticEvaluationIsOpen}
         setIsOpen={setAutomaticEvaluationIsOpen}
       />   
