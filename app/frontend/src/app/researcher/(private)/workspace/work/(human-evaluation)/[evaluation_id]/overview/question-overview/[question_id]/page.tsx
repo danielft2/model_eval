@@ -21,7 +21,7 @@ export default async function QuestionOverviewPage({
   const { question_id } = await params;
   const response = await fetchWrapperServerComponent({
     asyncFunction: getQuestionOverviewUseCase,
-    data: { questionId: Number(question_id) },
+    data: { questionId: question_id },
   });
 
   if (!response?.data) return <h1>Ocorreu um erro.</h1>;

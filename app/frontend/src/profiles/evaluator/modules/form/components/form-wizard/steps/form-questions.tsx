@@ -1,17 +1,15 @@
-import { evaluateQuestionsAction } from "@/profiles/evaluator/form/actions/http/evaluate-questions-action";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import { useWizard, Wizard } from "react-use-wizard";
 
-import {
-  FormQuestionsData,
-  FormQuestionsSchema,
-} from "@/profiles/evaluator/form/schemas/form-questions-schema";
+
 import { useLoadingStore } from "@/shared/stores/loading-store";
 import { tImportedQuestion } from "@/core/types/imported-question";
 
 import { FormQuestion } from "./form-question";
+import { evaluateQuestionsAction } from "../../../actions/http/evaluate-questions-action";
+import { FormQuestionsData, FormQuestionsSchema } from "../../../schemas/form-questions-schema";
 
 type FormQuestionsProps = {
   questions: tImportedQuestion[];

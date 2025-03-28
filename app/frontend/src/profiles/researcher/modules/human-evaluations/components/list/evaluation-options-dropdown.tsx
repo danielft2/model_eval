@@ -1,13 +1,9 @@
 'use client'
-
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
-import { useAction } from "next-safe-action/hooks";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { toast } from "sonner";
 
-import { deleteEvaluationAction } from "@/automatic-evaluations/actions/http/delete-evaluation-action";
-import { AutomaticEvaluationFormModal } from "@/automatic-evaluations/components/form";
+import { deleteHumanEvaluationAction } from "@/human-evaluations/actions/http/delete-evaluation-action";
 import { Button } from "@/shared/components/ui/button";
 import {
   DropdownMenu,
@@ -15,28 +11,20 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/shared/components/ui/dropdown-menu";
+import { HumanEvaluationFormModal } from "../form";
 
 type AutomaticEvaluationCardOptionsProps = {
-  evaluationId: string;
+  evaluationId: string
 };
 
-export function EvaluationCardOptions({ evaluationId }: AutomaticEvaluationCardOptionsProps) {
+export function EvaluationOptionsDropdown({ evaluationId }: AutomaticEvaluationCardOptionsProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { executeAsync } = useAction(deleteEvaluationAction, {
-    onSuccess: ({ data }) => {
-      toast.success(data?.message);
-    },
-    onError: ({ error }) => {
-      toast.error(error.serverError);
-    },
-  });
-
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
 
   async function handleDeleteEvaluation() {
-    await executeAsync({ evaluationId });
+    await deleteHumanEvaluationAction({ evaluationId })
   }
 
   function handleEditEvaluation() {
@@ -69,7 +57,7 @@ export function EvaluationCardOptions({ evaluationId }: AutomaticEvaluationCardO
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <AutomaticEvaluationFormModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <HumanEvaluationFormModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 }
