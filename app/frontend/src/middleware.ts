@@ -6,6 +6,7 @@ import { decodeJwt } from 'jose';
 import { verifyToken } from "./profiles/researcher/modules/auth/actions/utils/verify-token-action";
 
 const publicRoutes = [
+  { path: "/", whenAuthenticated: "redirect" },
   { path: "/researcher", whenAuthenticated: "redirect" },
   { path: "/form/[key]", whenAuthenticated: "next" },
 ] as const;
@@ -17,7 +18,7 @@ export async function middleware(request: NextRequest) {
   const publicRoute = publicRoutes.find((route) => route.path === pathName);
   const authToken = request.cookies.get("token")?.value;
 
-  if (pathName === "/") {
+  if (!authToken && pathName === "/") {
     return redirectWhenNotAuthenticated(request.nextUrl.clone());
   }
 
@@ -25,7 +26,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  if (!authToken && pathName.includes("/workspace")) {
+  if (!authToken && pathName.includes("/researcher")) {
     const searchParams = new URLSearchParams(request.nextUrl.search);
     const token = searchParams.get("token") ?? "";
 
@@ -67,9 +68,9 @@ export async function middleware(request: NextRequest) {
 
       return response;
     }
-
+    
     const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname = "/workspace/work";
+    redirectUrl.pathname = "/researcher/work";
     return NextResponse.redirect(redirectUrl);
   }
 
