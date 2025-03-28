@@ -3,7 +3,7 @@ import { CircleUserRound, Wrench } from "lucide-react";
 import { Suspense } from "react";
 
 import { AutomaticEvaluationList } from "@/automatic-evaluations/components/list";
-import { HumanEvaluationsList } from "@/human-evaluations/components/evaluation-list";
+import { HumanEvaluationsList } from "@/human-evaluations/components/list";
 import { CardListFallback } from "@/profiles/researcher/shared/components/cards-list-fallback";
 import { NewEvaluationButton } from "./new-evaluation-button";
 

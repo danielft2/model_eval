@@ -1,5 +1,5 @@
-import { fetchClient } from "@/external/http/client/fetch-client";
 import { getEvaluatorId } from "../utils/get-evaluator-id-action";
+import { factoryHttpClient } from "@/infra/http/factory-http-client";
 
 type EvaluateQuestionsActionProps = {
   key: string;
@@ -14,7 +14,7 @@ type EvaluateQuestionsActionProps = {
 export async function evaluateQuestionsAction({ questions, key }: EvaluateQuestionsActionProps) {
   const evaluatorId = await getEvaluatorId();
 
-  const response = await fetchClient.request({
+  const response = await factoryHttpClient().request({
     method: "POST",
     endpoint: "/evaluations/evaluate-questions",
     options: {

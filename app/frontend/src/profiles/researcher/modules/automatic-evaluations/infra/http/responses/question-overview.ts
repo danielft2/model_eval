@@ -1,5 +1,5 @@
 import { tImportedQuestion } from "@/core/types";
-import { MetricsResult } from "@/human-evaluations/externals/http/responses/human-evaluation-allquestions-overview";
+import { MetricsResult } from "@/human-evaluations/infra/http/responses/human-evaluation-allquestions-overview";
 
 export type QuestionOverview = {
   question: tImportedQuestion;

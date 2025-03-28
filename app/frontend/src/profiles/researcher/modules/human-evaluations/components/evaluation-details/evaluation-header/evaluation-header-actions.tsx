@@ -14,6 +14,7 @@ import { Switch } from "@/shared/components/ui/switch";
 import { useHumanEvaluationDetailsStore } from "@/shared/stores/human-evaluation-details";
 
 import { EvaluationHeaderImportQuestions } from "./evaluation-header-import-questions";
+import { useAction } from "next-safe-action/hooks";
 
 type EvaluationHeaderActionsProps = {
   evaluationDetails: HumanEvaluationDetails | null;
@@ -22,7 +23,7 @@ type EvaluationHeaderActionsProps = {
 export function EvaluationHeaderActions({
   evaluationDetails,
 }: EvaluationHeaderActionsProps) {
-  const { id } = useParams<{ id: string }>();
+  const { evaluation_id } = useParams<{ evaluation_id: string }>();
 
   const setEvaluationDetails = useHumanEvaluationDetailsStore(
     (state) => state.setDataOverview
@@ -42,16 +43,25 @@ export function EvaluationHeaderActions({
 
   const isAvaliableToImportQuestions = !isAvaliableEvaluation && evaluationQuestions.length === 0;
 
+  const { executeAsync } = useAction(changeStatusAction, {
+    onSuccess: ({ data }) => {
+      const evaluation = data?.data;
+      toast.success(data?.message);
+      setEvaluationDetails({ evaluation });
+    }
+  })
+
   const handleChangeStatus = async () => {
     startTransition(async () => {
       setOptimisticAvaliable((state) => !state);
-      await changeStatusAction({ evaluationId: id });
+      executeAsync({ evaluationId: evaluation_id });
     });
   };
 
+  
   const handleSharedEvaluation = async () => {
     const link = await createSharedLinkAction(evaluationDetails?.id || "");
-    navigator.clipboard.writeText(`${window.location.origin}/form/${link}`);
+    navigator.clipboard.writeText(`${window.location.origin}/evaluator/form/${link}`);
     toast.success("Link copiado para a área de transferência");
   };
 
@@ -68,7 +78,7 @@ export function EvaluationHeaderActions({
       </div>
 
       <Show when={isAvaliableToImportQuestions}>
-        <EvaluationHeaderImportQuestions evaluationId={id} />
+        <EvaluationHeaderImportQuestions evaluationId={evaluation_id} />
       </Show>
 
       <Button

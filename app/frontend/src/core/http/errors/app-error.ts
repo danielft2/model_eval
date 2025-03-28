@@ -1,4 +1,4 @@
-import { ResponseHttp, ValidationErrors } from "@/core/http/contracts/http-client";
+import { HttpResponse, ValidationErrors } from "@/core/http/contracts/http-client";
 
 export class AppError extends Error {
   constructor(
@@ -14,7 +14,7 @@ export class AppError extends Error {
     }
   }
 
-  public toResponseHttp<T>(): ResponseHttp<T> {
+  public toResponseHttp<T>(): HttpResponse<T> {
     return {
       error: {
         type: "error",

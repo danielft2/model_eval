@@ -1,16 +1,15 @@
 "use server";
 
-import { fetchClient } from "@/external/http/client/fetch-client";
-import { verifyResponse } from "@/shared/actions/utils/auth/verify-response-action";
 import { ResponseApp } from "@/core/http/contracts/response-app";
 import { EvaluationFormResponse } from "../../external/http/responses/evaluation-form";
+import { factoryHttpClient } from "@/infra/http/factory-http-client";
 
 export async function getEvaluationFormAction(
   key: string
 ): Promise<
   ResponseApp<EvaluationFormResponse, { status: number; message: string }>
 > {
-  const response = await fetchClient.request<EvaluationFormResponse>({
+  const response = await factoryHttpClient().request<EvaluationFormResponse>({
     method: "GET",
     endpoint: "/evaluations/evaluate-questions",
     options: {
@@ -19,8 +18,6 @@ export async function getEvaluationFormAction(
       },
     },
   });
-
-  await verifyResponse(response);
 
   return {
     data: response.data || null,

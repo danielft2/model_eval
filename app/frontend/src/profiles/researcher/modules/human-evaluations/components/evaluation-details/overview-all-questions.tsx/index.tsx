@@ -2,7 +2,6 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 
-import { tImportedQuestion } from "@/core/types";
 import {
   Select,
   SelectContent,
@@ -10,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shared/components/ui/select";
-import { useHumanEvaluationDetailsStore } from "@/shared/stores/human-evaluation-details";
+import { tQuestions, useHumanEvaluationDetailsStore } from "@/shared/stores/human-evaluation-details";
 import { Content } from "./content";
 
 export function OverviewAllQuestions() {
@@ -23,15 +22,15 @@ export function OverviewAllQuestions() {
     (state) => state.questions
   );
 
-  const questionsOptions: tImportedQuestion[] = useMemo(() => {
+  const questionsOptions: tQuestions[] = useMemo(() => {
     return questionsDecriptors.reduce((acc, current) => {
       if (
         !acc.some(
-          (item: tImportedQuestion) =>
+          (item: tQuestions) =>
             item.descriptor_code === current.descriptor_code
         )
       ) {
-        acc.push(current);
+        acc.push(current as never);
       }
       return acc;
     }, []);

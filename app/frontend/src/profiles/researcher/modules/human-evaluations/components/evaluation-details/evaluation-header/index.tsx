@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect } from "react";
 
 import { getOverviewAction } from "@/human-evaluations/actions/http/get-overview-action";
@@ -12,7 +11,8 @@ import { useHumanEvaluationDetailsStore } from "@/shared/stores/human-evaluation
 import { EvaluationHeaderActions } from "./evaluation-header-actions";
 
 export function HumanEvaluationDetailsHeader() {
-  const { id } = useParams<{ id: string }>();
+  const { evaluation_id } = useParams<{ evaluation_id: string }>();
+  const { back } = useRouter();
 
   const evaluationDetails = useHumanEvaluationDetailsStore(
     (state) => state.evaluation
@@ -22,9 +22,9 @@ export function HumanEvaluationDetailsHeader() {
   );
 
   const retrieveQuestions = useCallback(async () => {
-    const response = await getOverviewAction({ evaluationId: id });
-    if (response?.data) setEvaluationDetails(response?.data.data);
-  }, [id, setEvaluationDetails]);
+    const response = await getOverviewAction({ evaluationId: evaluation_id });
+    if (response?.data?.data) setEvaluationDetails(response?.data.data);
+  }, [evaluation_id, setEvaluationDetails]);
 
   useEffect(() => {
     retrieveQuestions();
@@ -35,7 +35,7 @@ export function HumanEvaluationDetailsHeader() {
       <header className="flex justify-between items-end h-20">
         <div>
           <div className="flex items-center gap-2 font-heading text-sm -tracking-wider text-slate-600">
-            <Link href={"/workspace/work"}>Avaliações</Link>
+            <a className="cursor-pointer" onClick={back}>Avaliações</a>
             <span>/</span>
             <span className="text-brand-800 font-medium">
               {evaluationDetails?.title || "-"}

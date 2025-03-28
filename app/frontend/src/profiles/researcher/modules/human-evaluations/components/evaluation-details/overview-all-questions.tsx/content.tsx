@@ -17,13 +17,13 @@ type OverviewAllQuestionsProps = {
 
 export function Content({ decriptorCode }: OverviewAllQuestionsProps) {
   const [data, setData] = useState<HumanEvaluationAllQuestionsOverview>();
-  const { id } = useParams<{ id: string }>();
+  const { evaluation_id } = useParams<{ evaluation_id: string }>();
 
   useEffect(() => {
     (async () => {
       try {
         const response = await getOverviewAllQuestionsAction({
-          evaluationId: id,
+          evaluationId: evaluation_id,
           descriptor: decriptorCode,
         });
         if (!response?.data) toast.error(response?.serverError);
@@ -31,7 +31,7 @@ export function Content({ decriptorCode }: OverviewAllQuestionsProps) {
       } finally {
       }
     })();
-  }, [id, decriptorCode]);
+  }, [evaluation_id, decriptorCode]);
 
   return (
     <div className="space-y-5">
