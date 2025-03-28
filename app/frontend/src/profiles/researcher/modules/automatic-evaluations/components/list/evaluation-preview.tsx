@@ -21,7 +21,7 @@ export function EvaluationCard({ data }: AutomaticEvaluationCardProps) {
 
   return (
     <div className="block rounded-lg border overflow-hidden border-slate-300 min-w-[400px] flex-1 font-heading relative">
-      <Link href={`work/evaluations/${data.id}`}>
+      <Link href={`work/${data.id}`}>
         <div className="bg-slate-100 space-y-4 p-4">
           <div className="flex items-center justify-between">
             <h1 className="font-heading -tracking-wider text-base font-medium">
