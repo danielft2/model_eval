@@ -6,33 +6,39 @@
 cd app/backend
 ```
 
-2. Ativie o ambiente virtual do python:
+2. Instale o poetry=1.8.5
+
+```bash
+pip instal poetry=1.8.5
+```
+
+3. Ative o ambiente virtual do python:
 
 ```bash
 poetry shell
 ```
 
-3. Instale as dependências:
+4. Instale as dependências:
 
 ```bash
 poetry install
 ```
 
-4. Configure as variáveis de ambiente conforme descrito em [docs/backend/env-configuration.md](env-configuration.md).
+5. Configure as variáveis de ambiente conforme descrito em [docs/backend/env-configuration.md](env-configuration.md).
 
-5. Rode as migrations do banco de dados.
+6. Rode as migrations do banco de dados.
 
 ```bash
 alembic upgrade head
 ```
 
-6. Rode as seeds do banco de dados.
+7. Rode as seeds do banco de dados.
 
 ```bash
 task seed
 ```
 
-7. Inicie o servidor de desenvolvimento com:
+8. Inicie o servidor de desenvolvimento com:
 
 ```bash
 task run
